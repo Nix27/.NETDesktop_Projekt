@@ -27,7 +27,6 @@ namespace DataAccessLayer.Repositories
 		{
             string fifaCode = GetFifaCode(selectedRepresentation);
 
-            //dovrsiti dohvacanje playera!
 			ISet<Player> players = new HashSet<Player>();
             matches.Where(m => m.HomeTeam.Code == fifaCode).ToList()
                    .ForEach(ma => ma.HomeTeamStatistics.StartingEleven.ToList()

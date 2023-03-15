@@ -21,3 +21,4 @@ C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\ref\WindowsFormsApp.dll
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.Properties.Resources.resources
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.Settings.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.PlayerControl.resources

@@ -187,12 +187,14 @@ namespace DataAccessLayer.Models
         public bool Captain { get; set; }
 
         [JsonProperty("shirt_number")]
-        public long ShirtNumber { get; set; }
+        public int ShirtNumber { get; set; }
 
         [JsonProperty("position")]
         public string Position { get; set; }
         [JsonIgnore]
         public bool IsFavorite { get; set; }
+        [JsonIgnore]
+        public string profileUrl { get; set; } = @"C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg";
 
 		public override bool Equals(object? obj)
 		{
