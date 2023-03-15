@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Kp3PHX+Iqe9UbD8XSydE4fvzTCGkFWlsQlHmtLrCzzYsQCQbO6y17L1GgTgBcUdqkf64Wh5+NIJLayMhCmyYtQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Nix\\Documents\\.NET praktikum\\Nikola_Zečić_Projekt\\DataAccessLayer\\DataAccessLayer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nix\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

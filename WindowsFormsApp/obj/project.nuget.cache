@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "cpg+577DFHdJKa+4XQTsdMjZDDstJIGN+1l1OEgzwq/KyOo1xGI1l70XSYsPLwIG+hlEENocVJzyDa71dV4esA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Nix\\Documents\\.NET praktikum\\Nikola_Zečić_Projekt\\WindowsFormsApp\\WindowsFormsApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nix\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

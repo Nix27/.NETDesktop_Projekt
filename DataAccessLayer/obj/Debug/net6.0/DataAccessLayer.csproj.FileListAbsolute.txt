@@ -1,0 +1,12 @@
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
