@@ -2,6 +2,7 @@
 using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using DataAccessLayer.Utilities;
+using Microsoft.Win32;
 using System.Net.WebSockets;
 using System.Numerics;
 
@@ -12,9 +13,10 @@ namespace WindowsFormsApp
         private readonly IRepositoryFetch repoFetch = new RepositoryFetch();
         private AppSettingsFileRepository appSettingsFileRepo = new AppSettingsFileRepository(FileNames.appSettings);
         private Settings formSettings = new Settings();
-		IList<NationalTeam> allTeams;
-        IList<Match> allMatches;
-        IList<Player> players;
+		private IList<NationalTeam> allTeams;
+        private IList<Match> allMatches;
+        private IList<Player> players;
+        private IList<PlayerControl> selectedPlayerControls = new List<PlayerControl>();
 		public Form1()
         {
             InitializeComponent();
@@ -47,6 +49,7 @@ namespace WindowsFormsApp
 
 		private void cmbRepresentation_SelectedIndexChanged(object sender, EventArgs e)
 		{
+            selectedPlayerControls.Clear();
             flpFavouritePlayers.Controls.Clear();
             players = repoFetch.GetPlayersBasedOnFifaCode(allMatches, cmbRepresentation.SelectedItem.ToString());
 
@@ -56,46 +59,76 @@ namespace WindowsFormsApp
             {
                 PlayerControl pc = new PlayerControl();
                 pc.Profile = Image.FromFile(player.profileUrl);
-                pc.PlayerName = player.IsFavorite ? player.Name + " ⭐" : player.Name;
+                pc.PlayerName = player.Name;
                 pc.Number = player.ShirtNumber;
                 pc.Position = player.Position;
                 pc.Captain = player.Captain;
-                pc.MouseDown += playerControl_MouseDown;
+                pc.MouseClick += playerControl_MouseClick;
+                pc.MouseMove += playerControl_MouseMove;
 
                 flpPlayers.Controls.Add(pc);
             }
 		}
 
-        private void playerControl_MouseDown(object sender, MouseEventArgs e)
+        private void playerControl_MouseClick(object sender, MouseEventArgs e)
         {
             var playerControl = sender as PlayerControl;
-            playerControl.DoDragDrop(playerControl, DragDropEffects.Move);
+
+            if (!selectedPlayerControls.Contains(playerControl))
+            {
+                playerControl.BackColor = Color.FromArgb(162, 222, 243);
+                selectedPlayerControls.Add(playerControl);
+            }
+            else
+            {
+                playerControl.BackColor = SystemColors.Control;
+                selectedPlayerControls.Remove(playerControl);
+            }
+        }
+
+        private void playerControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left && selectedPlayerControls.Count > 0) 
+            {
+                PlayerControl pc = sender as PlayerControl;
+                pc.DoDragDrop(selectedPlayerControls, DragDropEffects.Move);
+            }
         }
 
         private void flp_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(PlayerControl)))
-                e.Effect = DragDropEffects.Move; 
+            if (e.Data.GetDataPresent(typeof(List<PlayerControl>)))
+                e.Effect = DragDropEffects.Move;
+            else
+                e.Effect = DragDropEffects.None;
         }
 
         private void flp_DragDrop(object sender, DragEventArgs e)
         {
-            var playerControl = e.Data.GetData(typeof(PlayerControl)) as PlayerControl;
-            var player = players.FirstOrDefault(p => p.ShirtNumber == playerControl.Number);
-
-            var flp = sender as FlowLayoutPanel;
-            if (flp.Name == flpFavouritePlayers.Name)
+            FlowLayoutPanel flp = sender as FlowLayoutPanel;
+            var playerControls = e.Data.GetData(typeof(List<PlayerControl>)) as List<PlayerControl>;
+            
+            foreach (var pc in playerControls)
             {
-                player.IsFavorite = true;
-                playerControl.PlayerName = player.IsFavorite ? player.Name + " ⭐" : player.Name;
-            }
-            else
-            {
-                player.IsFavorite = false;
-                playerControl.PlayerName = player.IsFavorite ? player.Name + " ⭐" : player.Name;
+                var player = players.FirstOrDefault(p => p.ShirtNumber == pc.Number);
+
+                if(flp.Name == flpFavouritePlayers.Name)
+                    player.IsFavorite = true;
+                else
+                    player.IsFavorite = false;
+
+                pc.PlayerName = player.IsFavorite ? player.Name + " ⭐" : player.Name;
+
+                if (flp != pc.Parent)
+                {
+                    flp.Controls.Add(pc);
+                    pc.BackColor = SystemColors.Control;
+                }
+                    
             }
 
-            flp.Controls.Add(playerControl);
+            selectedPlayerControls.ToList().ForEach(pc => pc.BackColor = SystemColors.Control);
+            selectedPlayerControls.Clear();
         }
-	}
+    }
 }
