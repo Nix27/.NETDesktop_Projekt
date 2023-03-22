@@ -66,6 +66,11 @@ namespace WindowsFormsApp
                 pc.MouseClick += playerControl_MouseClick;
                 pc.MouseMove += playerControl_MouseMove;
 
+                foreach(var pb in pc.Controls.OfType<PictureBox>())
+                {
+                    pb.MouseClick += pbPlayerProfile_MouseClick;
+                }
+
                 flpPlayers.Controls.Add(pc);
             }
 		}
@@ -129,6 +134,32 @@ namespace WindowsFormsApp
 
             selectedPlayerControls.ToList().ForEach(pc => pc.BackColor = SystemColors.Control);
             selectedPlayerControls.Clear();
+        }
+
+
+        private const string imagesPath = @"C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images";
+        private void pbPlayerProfile_MouseClick(object sender, MouseEventArgs e)
+        {
+            var pb = sender as PictureBox;
+            var playerControl = pb.Parent as PlayerControl;
+            var player = players.FirstOrDefault(p => p.ShirtNumber == playerControl.Number);
+
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.Title = "Choose profile image for player";
+            ofd.Filter = "Image files (*.png;*.jpg;*.jpeg;*.jfif)|*.png;*.jpg;*.jpeg;*.jfif;";
+
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = ofd.SafeFileName;
+                string filePath = Path.Combine(imagesPath, fileName);
+
+                pb.Image = Image.FromFile(ofd.FileName);
+                if(!File.Exists(filePath))
+                    File.Copy(ofd.FileName, filePath, true);
+
+                player.profileUrl = filePath;
+            }
         }
     }
 }
