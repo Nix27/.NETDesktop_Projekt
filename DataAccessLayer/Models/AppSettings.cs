@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer.IRepositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Models
 {
-    public class AppSettings
+    public class AppSettings : IFileFormattable<AppSettings>
     {
         private const char Del = ';';
 
@@ -27,9 +28,9 @@ namespace DataAccessLayer.Models
         public string Championship { get; set; }
         public string Language { get; set; }
 
-        public string ParseForFileLine() => $"{Championship}{Del}{Language}";
+        public string ForFileLine() => $"{Championship}{Del}{Language}";
 
-        public static AppSettings ParseFromFileLine(string line)
+        public AppSettings FromFileLine(string line)
         {
             var settings = line.Split(Del);
 

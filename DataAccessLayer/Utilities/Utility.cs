@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Utilities
 {
-    public static class FileNames
+    public class Utility
     {
-        public const string appSettings = "AppSettings.txt";
+        public static string ReadConfig()
+        {
+            return File.ReadAllText(FilePaths.configPath);
+        }
     }
 }

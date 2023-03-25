@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.IRepositories;
 using DataAccessLayer.Models;
+using DataAccessLayer.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace DataAccessLayer.Repositories
 {
     public class RepositoryFetch : IRepositoryFetch
     {
-        public async Task<IList<T>> GetAll<T>(string url)
+        public async Task<IList<T>> GetFromApi<T>(string url)
         {
             var client = new HttpClient();
             var response = await client.GetAsync(url);
@@ -23,7 +24,15 @@ namespace DataAccessLayer.Repositories
             return result;
         }
 
-		public IList<Player> GetPlayersBasedOnFifaCode(IList<Match> matches, string selectedRepresentation)
+        public IList<T> GetFromJson<T>(string path)
+        {
+            string data = File.ReadAllText(path);
+            var result = JsonConvert.DeserializeObject<List<T>>(data);
+
+            return result;
+        }
+
+        public IList<Player> GetPlayersBasedOnFifaCode(IList<Match> matches, string selectedRepresentation)
 		{
             string fifaCode = GetFifaCode(selectedRepresentation);
 

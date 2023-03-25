@@ -1,5 +1,4 @@
-﻿using DataAccessLayer.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.IRepositories
 {
-    public interface IFileRepository<T>
+    public interface IFileFormattable<T>
     {
-        void Save(T aps);
-        T Load();
+        string ForFileLine();
+        T FromFileLine(string line);
     }
 }

@@ -11,12 +11,12 @@ namespace WindowsFormsApp
     public partial class Form1 : Form
     {
         private readonly IRepositoryFetch repoFetch = new RepositoryFetch();
-        private AppSettingsFileRepository appSettingsFileRepo = new AppSettingsFileRepository(FileNames.appSettings);
         private Settings formSettings = new Settings();
 		private IList<NationalTeam> allTeams;
         private IList<Match> allMatches;
         private IList<Player> players;
         private IList<PlayerControl> selectedPlayerControls = new List<PlayerControl>();
+        private FileRepository<NationalTeam> ntrepo = new FileRepository<NationalTeam>(FilePaths.selectedTeamPath);
 		public Form1()
         {
             InitializeComponent();
@@ -24,33 +24,60 @@ namespace WindowsFormsApp
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            if (!File.Exists(FileNames.appSettings))
+            var fileRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
+
+            if (!File.Exists(FilePaths.appSettingsPath))
             {
                 var result = formSettings.ShowDialog();
                 if (result == DialogResult.OK)
                 {
                     var appSettingsForSave = formSettings.GetSettings();
-                    appSettingsFileRepo.Save(appSettingsForSave);
+                    fileRepo.SaveSingle(appSettingsForSave);
                 } 
             }
 
-            var loadedAppSettings = appSettingsFileRepo.Load();
+            var loadedAppSettings = fileRepo.LoadSingle();
             string championShip = loadedAppSettings.Championship;
             string language = loadedAppSettings.Language;
 
-            string urlForTeams = championShip == "Men" ? Links.menAllTeamsLink : Links.womenAllTeamsLink;
-            string urlForMatches = championShip == "Men" ? Links.menAllMatchesLink : Links.womenAllMatchesLink;
+            string methodForGetData = Utility.ReadConfig();
+            string urlForTeams = "";
+            string urlForMatches = "";
 
-            allTeams = await repoFetch.GetAll<NationalTeam>(urlForTeams);
-            cmbRepresentation.Items.AddRange(allTeams.Select(t => $"{t.Country} ({t.FifaCode})").ToArray());
+            if(methodForGetData == "API")
+            {
+                urlForTeams = championShip == "Men" ? Links.menAllTeamsLink : Links.womenAllTeamsLink;
+                urlForMatches = championShip == "Men" ? Links.menAllMatchesLink : Links.womenAllMatchesLink;
 
-			allMatches = await repoFetch.GetAll<Match>(urlForMatches);
+                allTeams = await repoFetch.GetFromApi<NationalTeam>(urlForTeams);
+                allMatches = await repoFetch.GetFromApi<Match>(urlForMatches);
+            }
+            else if(methodForGetData == "JSON")
+            {
+                urlForTeams = championShip == "Men" ? Links.menAllTeamsJson : Links.womenAllTeamsJson;
+                urlForMatches = championShip == "Men" ? Links.menAllMatchesJson : Links.womenAllMatchesJson;
+
+                allTeams = repoFetch.GetFromJson<NationalTeam>(urlForTeams);
+                allMatches = repoFetch.GetFromJson<Match>(urlForMatches);
+            }
+            
+            cmbRepresentation.Items.AddRange(allTeams.Select(t => t.ToString()).ToArray());
+
+            if (File.Exists(FilePaths.selectedTeamPath))
+            {
+                var loadedTeam = ntrepo.LoadSingle();
+                cmbRepresentation.SelectedItem = loadedTeam.ToString();
+            }
 		}
 
 		private void cmbRepresentation_SelectedIndexChanged(object sender, EventArgs e)
 		{
             selectedPlayerControls.Clear();
             flpFavouritePlayers.Controls.Clear();
+
+            var selectedCountry = allTeams.ToArray()[cmbRepresentation.SelectedIndex];
+            ntrepo.SaveSingle(selectedCountry);
+
             players = repoFetch.GetPlayersBasedOnFifaCode(allMatches, cmbRepresentation.SelectedItem.ToString());
 
             if(flpPlayers.Controls.Count > 0) flpPlayers.Controls.Clear();
@@ -136,8 +163,6 @@ namespace WindowsFormsApp
             selectedPlayerControls.Clear();
         }
 
-
-        private const string imagesPath = @"C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images";
         private void pbPlayerProfile_MouseClick(object sender, MouseEventArgs e)
         {
             var pb = sender as PictureBox;
@@ -152,7 +177,7 @@ namespace WindowsFormsApp
             if(ofd.ShowDialog() == DialogResult.OK)
             {
                 string fileName = ofd.SafeFileName;
-                string filePath = Path.Combine(imagesPath, fileName);
+                string filePath = Path.Combine(FilePaths.imagesPath, fileName);
 
                 pb.Image = Image.FromFile(ofd.FileName);
                 if(!File.Exists(filePath))

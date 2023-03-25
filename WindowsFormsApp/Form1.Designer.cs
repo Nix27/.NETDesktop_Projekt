@@ -208,7 +208,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1226, 512);
+            this.ClientSize = new System.Drawing.Size(1221, 512);
             this.Controls.Add(this.lblPlayers);
             this.Controls.Add(this.lblFavouritePlayers);
             this.Controls.Add(this.pnlFavouritePlayersHeader);

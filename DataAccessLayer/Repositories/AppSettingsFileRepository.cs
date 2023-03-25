@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
-    public class AppSettingsFileRepository : FileRepository, IFileRepository<AppSettings>
-    {
-        public AppSettingsFileRepository(string path) : base(path)
-        {
-        }
+    //public class AppSettingsFileRepository : FileRepository, IFileRepository<AppSettings>
+    //{
+    //    public AppSettingsFileRepository(string path) : base(path)
+    //    {
+    //    }
 
-        public AppSettings Load()
-        {
-            var settings = File.ReadAllText(PATH);
-            return AppSettings.ParseFromFileLine(settings);
-        }
+    //    public AppSettings Load()
+    //    {
+    //        var settings = File.ReadAllText(PATH);
+    //        return AppSettings.ParseFromFileLine(settings);
+    //    }
 
-        public void Save(AppSettings aps)
-        {
-            File.WriteAllText(PATH, aps.ParseForFileLine());
-        }
-    }
+    //    public void Save(AppSettings aps)
+    //    {
+    //        File.WriteAllText(PATH, aps.ParseForFileLine());
+    //    }
+    //}
 }
