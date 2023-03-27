@@ -61,5 +61,21 @@ namespace DataAccessLayer.Repositories
 			string code = s.Split('(')[1];
 			return s.Split('(')[1].Substring(0, code.Length - 1);
 		}
-	}
+
+        public IList<Player> GetAllPlayers(IList<Match> matches)
+        {
+            ISet<Player> allPlayers = new HashSet<Player>();
+
+            matches.ToList().ForEach(m => m.HomeTeamStatistics.StartingEleven.ToList()
+                            .ForEach(p => allPlayers.Add(p)));
+            matches.ToList().ForEach(m => m.HomeTeamStatistics.Substitutes.ToList()
+                            .ForEach(p => allPlayers.Add(p)));
+            matches.ToList().ForEach(m => m.AwayTeamStatistics.StartingEleven.ToList()
+                            .ForEach(p => allPlayers.Add(p)));
+            matches.ToList().ForEach(m => m.AwayTeamStatistics.Substitutes.ToList()
+                            .ForEach(p => allPlayers.Add(p)));
+
+            return allPlayers.ToList();
+        }
+    }
 }

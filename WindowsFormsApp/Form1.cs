@@ -16,7 +16,8 @@ namespace WindowsFormsApp
         private IList<Match> allMatches;
         private IList<Player> players;
         private IList<PlayerControl> selectedPlayerControls = new List<PlayerControl>();
-        private FileRepository<NationalTeam> ntrepo = new FileRepository<NationalTeam>(FilePaths.selectedTeamPath);
+        private FileRepository<NationalTeam> ntRepo = new FileRepository<NationalTeam>(FilePaths.selectedTeamPath);
+        private FileRepository<Player> playerRepo;
 		public Form1()
         {
             InitializeComponent();
@@ -65,7 +66,7 @@ namespace WindowsFormsApp
 
             if (File.Exists(FilePaths.selectedTeamPath))
             {
-                var loadedTeam = ntrepo.LoadSingle();
+                var loadedTeam = ntRepo.LoadSingle();
                 cmbRepresentation.SelectedItem = loadedTeam.ToString();
             }
 		}
@@ -76,16 +77,23 @@ namespace WindowsFormsApp
             flpFavouritePlayers.Controls.Clear();
 
             var selectedCountry = allTeams.ToArray()[cmbRepresentation.SelectedIndex];
-            ntrepo.SaveSingle(selectedCountry);
+            ntRepo.SaveSingle(selectedCountry);
 
-            players = repoFetch.GetPlayersBasedOnFifaCode(allMatches, cmbRepresentation.SelectedItem.ToString());
+            string country = GetSelectedCountry(cmbRepresentation.SelectedItem.ToString());
+            string path = FilePaths.players + country + "Players.txt";
+            playerRepo = new FileRepository<Player>(path);
+
+            if(File.Exists(path))
+                players = playerRepo.LoadMultiple();
+            else
+               players = repoFetch.GetPlayersBasedOnFifaCode(allMatches, cmbRepresentation.SelectedItem.ToString());
 
             if(flpPlayers.Controls.Count > 0) flpPlayers.Controls.Clear();
 
             foreach(var player in players)
             {
                 PlayerControl pc = new PlayerControl();
-                pc.Profile = Image.FromFile(player.profileUrl);
+                pc.Profile = Image.FromFile(player.ProfileUrl);
                 pc.PlayerName = player.Name;
                 pc.Number = player.ShirtNumber;
                 pc.Position = player.Position;
@@ -98,9 +106,17 @@ namespace WindowsFormsApp
                     pb.MouseClick += pbPlayerProfile_MouseClick;
                 }
 
-                flpPlayers.Controls.Add(pc);
+                if (player.IsFavorite)
+                    flpFavouritePlayers.Controls.Add(pc);
+                else
+                    flpPlayers.Controls.Add(pc);
             }
 		}
+
+        private string GetSelectedCountry(string selectedItem)
+        {
+            return selectedItem.Split(' ')[0];
+        }
 
         private void playerControl_MouseClick(object sender, MouseEventArgs e)
         {
@@ -183,8 +199,13 @@ namespace WindowsFormsApp
                 if(!File.Exists(filePath))
                     File.Copy(ofd.FileName, filePath, true);
 
-                player.profileUrl = filePath;
+                player.ProfileUrl = filePath;
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            playerRepo.SaveMultiple(players);
         }
     }
 }

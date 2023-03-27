@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using DataAccessLayer.IRepositories;
 
 namespace DataAccessLayer.Models
 {
@@ -178,8 +179,11 @@ namespace DataAccessLayer.Models
         public Player[] Substitutes { get; set; }
     }
 
-    public partial class Player
+    public partial class Player : IFileFormattable<Player>
 	{
+        [JsonIgnore]
+        private const char Del = ';';
+
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -194,15 +198,31 @@ namespace DataAccessLayer.Models
         [JsonIgnore]
         public bool IsFavorite { get; set; }
         [JsonIgnore]
-        public string profileUrl { get; set; } = @"C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg";
+        public string ProfileUrl { get; set; } = @"C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg";
+        public string ForFileLine() => $"{Name}{Del}{Captain}{Del}{ShirtNumber}{Del}{Position}{Del}{IsFavorite}{Del}{ProfileUrl}";
 
-		public override bool Equals(object? obj)
-		{
-			return obj is Player player &&
-				   Name == player.Name;
-		}
+        public Player FromFileLine(string line)
+        {
+            var details = line.Split(Del);
 
-		public override int GetHashCode()
+            return new Player 
+            {
+                Name = details[0],
+                Captain = bool.Parse(details[1]),
+                ShirtNumber = int.Parse(details[2]),
+                Position = details[3],
+                IsFavorite = bool.Parse(details[4]),
+                ProfileUrl = details[5]
+            };
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Player player &&
+                   Name == player.Name;
+        }
+
+        public override int GetHashCode()
 		{
 			return HashCode.Combine(Name);
 		}

@@ -12,5 +12,6 @@ namespace DataAccessLayer.IRepositories
         Task<IList<T>> GetFromApi<T>(string url);
         IList<T> GetFromJson<T>(string path);
         IList<Player> GetPlayersBasedOnFifaCode(IList<Match> matches, string selectedRepresentation);
+        IList<Player> GetAllPlayers(IList<Match> matches);
     }
 }
