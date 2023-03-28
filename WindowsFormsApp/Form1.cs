@@ -177,6 +177,7 @@ namespace WindowsFormsApp
 
             selectedPlayerControls.ToList().ForEach(pc => pc.BackColor = SystemColors.Control);
             selectedPlayerControls.Clear();
+            playerRepo.SaveMultiple(players);
         }
 
         private void pbPlayerProfile_MouseClick(object sender, MouseEventArgs e)
@@ -200,6 +201,7 @@ namespace WindowsFormsApp
                     File.Copy(ofd.FileName, filePath, true);
 
                 player.ProfileUrl = filePath;
+                playerRepo.SaveMultiple(players);
             }
         }
 
