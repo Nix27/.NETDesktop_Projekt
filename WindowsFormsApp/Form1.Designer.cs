@@ -51,7 +51,7 @@
             // cmbRepresentation
             // 
             this.cmbRepresentation.FormattingEnabled = true;
-            this.cmbRepresentation.Location = new System.Drawing.Point(43, 48);
+            this.cmbRepresentation.Location = new System.Drawing.Point(43, 60);
             this.cmbRepresentation.Name = "cmbRepresentation";
             this.cmbRepresentation.Size = new System.Drawing.Size(195, 28);
             this.cmbRepresentation.TabIndex = 0;
@@ -60,7 +60,7 @@
             // lblChooseRep
             // 
             this.lblChooseRep.AutoSize = true;
-            this.lblChooseRep.Location = new System.Drawing.Point(43, 9);
+            this.lblChooseRep.Location = new System.Drawing.Point(43, 21);
             this.lblChooseRep.Name = "lblChooseRep";
             this.lblChooseRep.Size = new System.Drawing.Size(161, 20);
             this.lblChooseRep.TabIndex = 4;
