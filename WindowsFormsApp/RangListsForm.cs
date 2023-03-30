@@ -12,9 +12,15 @@ namespace WindowsFormsApp
 {
     public partial class RangListsForm : Form
     {
+        private Form1 f1 = new Form1();
         public RangListsForm()
         {
             InitializeComponent();
+        }
+
+        private void RangListsForm_Load(object sender, EventArgs e)
+        {
+            var rankedPlayers = f1.GetPlayersByGoals();
         }
     }
 }

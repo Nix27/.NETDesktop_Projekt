@@ -13,8 +13,8 @@ namespace WindowsFormsApp
         private readonly IRepositoryFetch repoFetch = new RepositoryFetch();
         private Settings formSettings = new Settings();
 		private IList<NationalTeam> allTeams;
-        private IList<Match> allMatches;
-        private IList<Player> players;
+        private static IList<Match> allMatches;
+        private static IList<Player> players;
         private IList<PlayerControl> selectedPlayerControls = new List<PlayerControl>();
         private FileRepository<NationalTeam> ntRepo = new FileRepository<NationalTeam>(FilePaths.selectedTeamPath);
         private FileRepository<Player> playerRepo;
@@ -86,7 +86,7 @@ namespace WindowsFormsApp
             if(File.Exists(path))
                 players = playerRepo.LoadMultiple();
             else
-               players = repoFetch.GetPlayersBasedOnFifaCode(allMatches, cmbRepresentation.SelectedItem.ToString());
+               players = Utility.GetPlayersBasedOnFifaCode(allMatches, cmbRepresentation.SelectedItem.ToString());
 
             if(flpPlayers.Controls.Count > 0) flpPlayers.Controls.Clear();
 
@@ -112,6 +112,11 @@ namespace WindowsFormsApp
                     flpPlayers.Controls.Add(pc);
             }
 		}
+
+        public IEnumerable<RankedPlayer> GetPlayersByGoals()
+        {
+            return Utility.GetPlayersForGoalRanking(allMatches, players);
+        }
 
         private string GetSelectedCountry(string selectedItem)
         {
