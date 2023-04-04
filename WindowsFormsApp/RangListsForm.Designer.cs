@@ -31,9 +31,10 @@
             this.dgvPlayers = new System.Windows.Forms.DataGridView();
             this.btnGoals = new System.Windows.Forms.Button();
             this.btnYellowCards = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvMatches = new System.Windows.Forms.DataGridView();
+            this.btnCreatePdf = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMatches)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvPlayers
@@ -43,7 +44,7 @@
             this.dgvPlayers.Name = "dgvPlayers";
             this.dgvPlayers.RowHeadersWidth = 51;
             this.dgvPlayers.RowTemplate.Height = 29;
-            this.dgvPlayers.Size = new System.Drawing.Size(584, 386);
+            this.dgvPlayers.Size = new System.Drawing.Size(450, 386);
             this.dgvPlayers.TabIndex = 0;
             // 
             // btnGoals
@@ -54,6 +55,7 @@
             this.btnGoals.TabIndex = 1;
             this.btnGoals.Text = "Goals";
             this.btnGoals.UseVisualStyleBackColor = true;
+            this.btnGoals.Click += new System.EventHandler(this.btnGoals_Click);
             // 
             // btnYellowCards
             // 
@@ -63,23 +65,35 @@
             this.btnYellowCards.TabIndex = 2;
             this.btnYellowCards.Text = "Yellow cards";
             this.btnYellowCards.UseVisualStyleBackColor = true;
+            this.btnYellowCards.Click += new System.EventHandler(this.btnYellowCards_Click);
             // 
-            // dataGridView1
+            // dgvMatches
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(688, 103);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(584, 386);
-            this.dataGridView1.TabIndex = 3;
+            this.dgvMatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMatches.Location = new System.Drawing.Point(554, 103);
+            this.dgvMatches.Name = "dgvMatches";
+            this.dgvMatches.RowHeadersWidth = 51;
+            this.dgvMatches.RowTemplate.Height = 29;
+            this.dgvMatches.Size = new System.Drawing.Size(549, 386);
+            this.dgvMatches.TabIndex = 3;
+            // 
+            // btnCreatePdf
+            // 
+            this.btnCreatePdf.Location = new System.Drawing.Point(955, 45);
+            this.btnCreatePdf.Name = "btnCreatePdf";
+            this.btnCreatePdf.Size = new System.Drawing.Size(148, 36);
+            this.btnCreatePdf.TabIndex = 4;
+            this.btnCreatePdf.Text = "Create pdf";
+            this.btnCreatePdf.UseVisualStyleBackColor = true;
+            this.btnCreatePdf.Click += new System.EventHandler(this.btnCreatePdf_Click);
             // 
             // RangListsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1312, 537);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(1141, 537);
+            this.Controls.Add(this.btnCreatePdf);
+            this.Controls.Add(this.dgvMatches);
             this.Controls.Add(this.btnYellowCards);
             this.Controls.Add(this.btnGoals);
             this.Controls.Add(this.dgvPlayers);
@@ -87,7 +101,7 @@
             this.Text = "RangListsForm";
             this.Load += new System.EventHandler(this.RangListsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMatches)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -97,6 +111,7 @@
         private DataGridView dgvPlayers;
         private Button btnGoals;
         private Button btnYellowCards;
-        private DataGridView dataGridView1;
+        private DataGridView dgvMatches;
+        private Button btnCreatePdf;
     }
 }

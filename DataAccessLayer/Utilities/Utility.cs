@@ -44,8 +44,16 @@ namespace DataAccessLayer.Utilities
             return s.Split('(')[1].Substring(0, code.Length - 1);
         }
 
-        public static IEnumerable<RankedPlayer> GetPlayersForGoalRanking(IList<Match> matches, IList<Player> players)
+        public enum EventType
         {
+            Goals,
+            YellowCards
+        }
+
+        public static IEnumerable<RankedPlayer> GetPlayersForRanking(IList<Match> matches, IList<Player> players, EventType eventType)
+        {
+            string evType = eventType == EventType.Goals ? "goal" : "yellow-card";
+
             IList<TeamEvent> teamEvents = new List<TeamEvent>();
             matches.ToList().ForEach(m => m.HomeTeamEvents.ToList()
                             .ForEach(hte => teamEvents.Add(hte)));
@@ -53,16 +61,32 @@ namespace DataAccessLayer.Utilities
             matches.ToList().ForEach(m => m.AwayTeamEvents.ToList()
                             .ForEach(ate => teamEvents.Add(ate)));
 
-            var goals = teamEvents.Where(te => te.TypeOfEvent == "goal")
+            var events = teamEvents.Where(te => te.TypeOfEvent == evType)
                                   .GroupBy(te => te.Player)
-                                  .Select(g => new {PlayerName = g.Key, Goals = g.Count()});
+                                  .Select(ev => new {PlayerName = ev.Key, Goals = ev.Count()});
 
-            IEnumerable<RankedPlayer> playersRankedByGoals = players.Join(
-                goals, 
-                p => p.Name, g => g.PlayerName,
-                (p, g) => new RankedPlayer { ProfileURL = p.ProfileUrl, PlayerName = p.Name, Amount = g.Goals });
+            IEnumerable<RankedPlayer> rankedPlayers = players.Join(
+                events, 
+                p => p.Name, ev => ev.PlayerName,
+                (p, ev) => new RankedPlayer { ProfileURL = p.ProfileUrl, PlayerName = p.Name, Amount = ev.Goals });
 
-            return playersRankedByGoals;
+            return rankedPlayers.OrderByDescending(r => r.Amount);
+        }
+
+        public static IEnumerable<RankedMatch> GetRankedMatches(IList<Match> matches, string selectedRepresentation)
+        {
+            string fifaCode = GetFifaCode(selectedRepresentation);
+
+            var rankedMatches = matches.Where(m => m.HomeTeam.Code == fifaCode || m.AwayTeam.Code == fifaCode)
+                   .Select(ma => new RankedMatch
+                   {
+                       Location = ma.Location,
+                       Attendance = ma.Attendance,
+                       HomeCountry = ma.HomeTeamCountry,
+                       AwayCountry = ma.AwayTeamCountry
+                   }); 
+
+            return rankedMatches.OrderByDescending(rm => rm.Attendance);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace WindowsFormsApp
 		private IList<NationalTeam> allTeams;
         private static IList<Match> allMatches;
         private static IList<Player> players;
+        private static string selectedRepresentation;
         private IList<PlayerControl> selectedPlayerControls = new List<PlayerControl>();
         private FileRepository<NationalTeam> ntRepo = new FileRepository<NationalTeam>(FilePaths.selectedTeamPath);
         private FileRepository<Player> playerRepo;
@@ -76,17 +77,19 @@ namespace WindowsFormsApp
             selectedPlayerControls.Clear();
             flpFavouritePlayers.Controls.Clear();
 
+            selectedRepresentation = cmbRepresentation.SelectedItem.ToString();
+
             var selectedCountry = allTeams.ToArray()[cmbRepresentation.SelectedIndex];
             ntRepo.SaveSingle(selectedCountry);
 
-            string country = GetSelectedCountry(cmbRepresentation.SelectedItem.ToString());
-            string path = FilePaths.players + country + "Players.txt";
+            string country = GetSelectedCountry(selectedRepresentation);
+            string path = FilePaths.playersPath + country + "Players.txt";
             playerRepo = new FileRepository<Player>(path);
 
             if(File.Exists(path))
                 players = playerRepo.LoadMultiple();
             else
-               players = Utility.GetPlayersBasedOnFifaCode(allMatches, cmbRepresentation.SelectedItem.ToString());
+               players = Utility.GetPlayersBasedOnFifaCode(allMatches, selectedRepresentation);
 
             if(flpPlayers.Controls.Count > 0) flpPlayers.Controls.Clear();
 
@@ -113,9 +116,14 @@ namespace WindowsFormsApp
             }
 		}
 
-        public IEnumerable<RankedPlayer> GetPlayersByGoals()
+        public IEnumerable<RankedPlayer> GetRankedPlayers(Utility.EventType et)
         {
-            return Utility.GetPlayersForGoalRanking(allMatches, players);
+            return Utility.GetPlayersForRanking(allMatches, players, et);
+        }
+
+        public IEnumerable<RankedMatch> GetRankedMatches()
+        {
+            return Utility.GetRankedMatches(allMatches, selectedRepresentation);
         }
 
         private string GetSelectedCountry(string selectedItem)
