@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Utilities;
+using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
@@ -48,15 +49,29 @@ namespace WindowsFormsApp
             rankedPlayersTable.Columns.Add("Name", typeof(string));
             rankedPlayersTable.Columns.Add(et == Utility.EventType.Goals ? "Goals" : "Yellow cards", typeof(int));
 
+            dgvPlayers.Columns.Add("Profile", "Profile");
+            dgvPlayers.Columns.Add("Name", "Name");
+            dgvPlayers.Columns.Add("Number", et == Utility.EventType.Goals ? "Goals" : "Yellow cards");
+
+            dgvPlayers.RowTemplate.Height = 70;
+
             foreach (var player in rankedPlayers)
             {
                 var image = System.Drawing.Image.FromFile(player.ProfileURL);
                 var profileImage = image.GetThumbnailImage(100, 70, null, IntPtr.Zero);
-                rankedPlayersTable.Rows.Add(profileImage, player.PlayerName, player.Amount);
-            }
+                var imgCell = new DataGridViewImageCell
+                {
+                    Value = profileImage,
+                    Tag = player.ProfileURL
+                };
 
-            dgvPlayers.RowTemplate.Height = 70;
-            dgvPlayers.DataSource = rankedPlayersTable;
+                DataGridViewRow row = new DataGridViewRow();
+                row.Cells.Add(imgCell);
+                row.Cells.Add(new DataGridViewTextBoxCell { Value = player.PlayerName });
+                row.Cells.Add(new DataGridViewTextBoxCell { Value = player.Amount });
+
+                dgvPlayers.Rows.Add(row);
+            }
 
             dgvPlayers.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvPlayers.BorderStyle = BorderStyle.None;
@@ -86,27 +101,49 @@ namespace WindowsFormsApp
 
         private void btnCreatePdf_Click(object sender, EventArgs e)
         {
-            PdfDocument pdfMatches = new PdfDocument(new PdfWriter(FilePaths.pdfMatchesPath));
-            Document doc = new Document(pdfMatches);
+            PdfDocument pdfDoc = new PdfDocument(new PdfWriter(FilePaths.pdfMatchesPath));
+            Document doc = new Document(pdfDoc);
 
-            Table tbl = new Table(dgvMatches.ColumnCount);
+            doc.Add(new Paragraph("Rank list of players"));
+            doc.Add(CreateTableForPrint(dgvPlayers));
+            doc.Add(new Paragraph());
+            doc.Add(new Paragraph("Rank list of matches"));
+            doc.Add(CreateTableForPrint(dgvMatches));
 
-            foreach (DataGridViewColumn column in dgvMatches.Columns)
+            doc.Close();
+        }
+
+        private Table CreateTableForPrint(DataGridView dgv)
+        {
+            Table tbl = new Table(dgv.ColumnCount);
+
+            foreach (DataGridViewColumn column in dgv.Columns)
             {
                 tbl.AddHeaderCell(new Cell().Add(new Paragraph(column.HeaderText)));
             }
 
-            foreach (DataGridViewRow row in dgvMatches.Rows)
+            foreach (DataGridViewRow row in dgv.Rows)
             {
                 foreach (DataGridViewCell cell in row.Cells)
                 {
-                    if(cell.Value != null)
-                        tbl.AddCell(new Cell().Add(new Paragraph(cell.Value.ToString())));
+                    if (cell.Value != null)
+                    {
+                        if (cell.ValueType == typeof(System.Drawing.Image))
+                        {
+                            ImageData imageData = ImageDataFactory.Create(cell.Tag.ToString());
+                            iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData);
+                            image = image.ScaleToFit(50, 50);
+                            tbl.AddCell(new Cell().Add(image));
+                        }
+                        else
+                        {
+                            tbl.AddCell(new Cell().Add(new Paragraph(cell.Value.ToString())));
+                        }
+                    }
                 }
             }
 
-            doc.Add(tbl);
-            doc.Close();
+            return tbl;
         }
     }
 }
