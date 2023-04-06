@@ -43,3 +43,4 @@ C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\bin
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\bin\Debug\net6.0-windows\Microsoft.Extensions.Options.dll
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\bin\Debug\net6.0-windows\Microsoft.Extensions.Primitives.dll
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\bin\Debug\net6.0-windows\BouncyCastle.Crypto.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.Forms.CostumMessageBoxForm.resources

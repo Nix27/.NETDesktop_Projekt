@@ -33,7 +33,6 @@
             this.lblLanguage = new System.Windows.Forms.Label();
             this.cmbLanguages = new System.Windows.Forms.ComboBox();
             this.btnOk = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblChampion
@@ -77,31 +76,22 @@
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(94, 29);
             this.btnOk.TabIndex = 4;
-            this.btnOk.Text = "Ok";
+            this.btnOk.Text = "Apply";
             this.btnOk.UseVisualStyleBackColor = true;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(239, 170);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(368, 246);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.cmbLanguages);
             this.Controls.Add(this.lblLanguage);
             this.Controls.Add(this.cmbChampionships);
             this.Controls.Add(this.lblChampion);
             this.Name = "Settings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.Settings_Load);
             this.ResumeLayout(false);
@@ -116,6 +106,5 @@
         private Label lblLanguage;
         private ComboBox cmbLanguages;
         private Button btnOk;
-        private Button btnCancel;
     }
 }

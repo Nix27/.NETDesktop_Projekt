@@ -1,4 +1,4 @@
-Hugo LLORIS;True;1;Goalie;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Hugo LLORIS;True;1;Goalie;True;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Benjamin PAVARD;False;2;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Raphael VARANE;False;4;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Samuel UMTITI;False;5;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
@@ -9,7 +9,7 @@ Ousmane DEMBELE;False;11;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nik
 Corentin TOLISSO;False;12;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Ngolo KANTE;False;13;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Lucas HERNANDEZ;False;21;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
-Olivier GIROUD;False;9;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Olivier GIROUD;False;9;Forward;True;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Blaise MATUIDI;False;14;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Steve MANDANDA;False;16;Goalie;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Presnel KIMPEMBE;False;3;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg

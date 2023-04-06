@@ -53,9 +53,13 @@ namespace WindowsFormsApp
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var result = MessageBox.Show("Are you sure you want exit application?", "Exit?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            
-            if(result == DialogResult.No)
+            Forms.CostumMessageBoxForm msgBoxFrom = new Forms.CostumMessageBoxForm();
+
+            msgBoxFrom.SetTitleAndQuestion("Exit", "Are you sure you want to exit the application?");
+            msgBoxFrom.AcceptButton = msgBoxFrom.Controls.Find("btnYes", false).FirstOrDefault() as Button;
+            msgBoxFrom.CancelButton = msgBoxFrom.Controls.Find("btnNo", false).FirstOrDefault() as Button;
+
+            if (msgBoxFrom.ShowDialog() == DialogResult.Cancel)
             {
                 e.Cancel = true;
             }
