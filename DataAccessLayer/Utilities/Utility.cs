@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,16 +45,8 @@ namespace DataAccessLayer.Utilities
             return s.Split('(')[1].Substring(0, code.Length - 1);
         }
 
-        public enum EventType
+        public static IEnumerable<RankedPlayer> GetPlayersForRanking(IList<Match> matches, IList<Player> players)
         {
-            Goals,
-            YellowCards
-        }
-
-        public static IEnumerable<RankedPlayer> GetPlayersForRanking(IList<Match> matches, IList<Player> players, EventType eventType)
-        {
-            string evType = eventType == EventType.Goals ? "goal" : "yellow-card";
-
             IList<TeamEvent> teamEvents = new List<TeamEvent>();
             matches.ToList().ForEach(m => m.HomeTeamEvents.ToList()
                             .ForEach(hte => teamEvents.Add(hte)));
@@ -61,16 +54,29 @@ namespace DataAccessLayer.Utilities
             matches.ToList().ForEach(m => m.AwayTeamEvents.ToList()
                             .ForEach(ate => teamEvents.Add(ate)));
 
-            var events = teamEvents.Where(te => te.TypeOfEvent == evType)
+            var goalEvents = teamEvents.Where(te => te.TypeOfEvent == "goal")
                                   .GroupBy(te => te.Player)
                                   .Select(ev => new {PlayerName = ev.Key, Goals = ev.Count()});
 
-            IEnumerable<RankedPlayer> rankedPlayers = players.Join(
-                events, 
-                p => p.Name, ev => ev.PlayerName,
-                (p, ev) => new RankedPlayer { ProfileURL = p.ProfileUrl, PlayerName = p.Name, Amount = ev.Goals });
+            var yellowCardsEvents = teamEvents.Where(te => te.TypeOfEvent == "yellow-card")
+                                  .GroupBy(te => te.Player)
+                                  .Select(ev => new { PlayerName = ev.Key, YellowCards = ev.Count()});
 
-            return rankedPlayers.OrderByDescending(r => r.Amount);
+            var events = goalEvents.GroupJoin(
+                yellowCardsEvents,
+                g => g.PlayerName, y => y.PlayerName,
+                (g, y) => new { Player = g.PlayerName, evGoals = g.Goals,  evYellowCards = y.Select(ye => ye.YellowCards).DefaultIfEmpty(0).FirstOrDefault() });
+
+            IEnumerable<RankedPlayer> rankedPlayers = players.GroupJoin(
+                events,
+                p => p.Name, ev => ev.Player,
+                (p, ev) => new RankedPlayer { 
+                    ProfileURL = p.ProfileUrl, 
+                    PlayerName = p.Name, 
+                    Goals = ev.Select(g => g.evGoals).DefaultIfEmpty(0).FirstOrDefault(), 
+                    YellowCards = ev.Select(y => y.evYellowCards).DefaultIfEmpty(0).FirstOrDefault() });
+
+            return rankedPlayers.OrderByDescending(r => r.Goals);
         }
 
         public static IEnumerable<RankedMatch> GetRankedMatches(IList<Match> matches, string selectedRepresentation)

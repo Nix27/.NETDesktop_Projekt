@@ -116,9 +116,9 @@ namespace WindowsFormsApp
             }
 		}
 
-        public IEnumerable<RankedPlayer> GetRankedPlayers(Utility.EventType et)
+        public IEnumerable<RankedPlayer> GetRankedPlayers()
         {
-            return Utility.GetPlayersForRanking(allMatches, players, et);
+            return Utility.GetPlayersForRanking(allMatches, players);
         }
 
         public IEnumerable<RankedMatch> GetRankedMatches()
@@ -216,11 +216,6 @@ namespace WindowsFormsApp
                 player.ProfileUrl = filePath;
                 playerRepo.SaveMultiple(players);
             }
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            playerRepo.SaveMultiple(players);
         }
     }
 }

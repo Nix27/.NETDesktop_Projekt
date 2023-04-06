@@ -50,5 +50,15 @@ namespace WindowsFormsApp
         {
             OpenNewForm(new Form1(), sender);
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want exit application?", "Exit?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            
+            if(result == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

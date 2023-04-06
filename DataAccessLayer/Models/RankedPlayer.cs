@@ -10,24 +10,25 @@ namespace DataAccessLayer.Models
     {
         public string ProfileURL { get; set; }
         public string PlayerName { get; set; }
-        public int Amount { get; set; }
+        public int Goals { get; set; }
+        public int YellowCards { get; set; }
 
         public override bool Equals(object? obj)
         {
             return obj is RankedPlayer player &&
-                   Amount == player.Amount;
+                   Goals == player.Goals;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Amount);
+            return HashCode.Combine(Goals);
         }
 
-        public int CompareTo(RankedPlayer? other) => Amount.CompareTo(other.Amount);
+        public int CompareTo(RankedPlayer? other) => Goals.CompareTo(other.Goals);
 
         public override string ToString()
         {
-            return $"{PlayerName} {Amount}";
+            return $"{PlayerName} {Goals}";
         }
     }
 }

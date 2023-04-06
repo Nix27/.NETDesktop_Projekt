@@ -25,35 +25,18 @@ namespace WindowsFormsApp
 
         private void RangListsForm_Load(object sender, EventArgs e)
         {
-            ShowPlayersRankList(Utility.EventType.Goals);
+            ShowPlayersRankList();
             ShowMatchesRankList();
         }
 
-        private void btnGoals_Click(object sender, EventArgs e)
+        private void ShowPlayersRankList()
         {
-            ShowPlayersRankList(Utility.EventType.Goals);
-        }
-
-        private void btnYellowCards_Click(object sender, EventArgs e)
-        {
-            ShowPlayersRankList(Utility.EventType.YellowCards);
-        }
-
-        private void ShowPlayersRankList(Utility.EventType et)
-        {
-            var rankedPlayers = f1.GetRankedPlayers(et);
-
-            DataTable rankedPlayersTable = new DataTable();
-
-            rankedPlayersTable.Columns.Add("Profile", typeof(System.Drawing.Image));
-            rankedPlayersTable.Columns.Add("Name", typeof(string));
-            rankedPlayersTable.Columns.Add(et == Utility.EventType.Goals ? "Goals" : "Yellow cards", typeof(int));
+            var rankedPlayers = f1.GetRankedPlayers();
 
             dgvPlayers.Columns.Add("Profile", "Profile");
             dgvPlayers.Columns.Add("Name", "Name");
-            dgvPlayers.Columns.Add("Number", et == Utility.EventType.Goals ? "Goals" : "Yellow cards");
-
-            dgvPlayers.RowTemplate.Height = 70;
+            dgvPlayers.Columns.Add("Goals", "Goals");
+            dgvPlayers.Columns.Add("YellowCards", "Yellow cards");
 
             foreach (var player in rankedPlayers)
             {
@@ -68,7 +51,9 @@ namespace WindowsFormsApp
                 DataGridViewRow row = new DataGridViewRow();
                 row.Cells.Add(imgCell);
                 row.Cells.Add(new DataGridViewTextBoxCell { Value = player.PlayerName });
-                row.Cells.Add(new DataGridViewTextBoxCell { Value = player.Amount });
+                row.Cells.Add(new DataGridViewTextBoxCell { Value = player.Goals });
+                row.Cells.Add(new DataGridViewTextBoxCell { Value = player.YellowCards });
+                row.Height = 70;
 
                 dgvPlayers.Rows.Add(row);
             }
@@ -132,7 +117,7 @@ namespace WindowsFormsApp
                         {
                             ImageData imageData = ImageDataFactory.Create(cell.Tag.ToString());
                             iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData);
-                            image = image.ScaleToFit(50, 50);
+                            image = image.ScaleToFit(70, 70);
                             tbl.AddCell(new Cell().Add(image));
                         }
                         else

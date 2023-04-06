@@ -97,6 +97,7 @@
             this.Controls.Add(this.pnlMenu);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.pnlMenu.ResumeLayout(false);
             this.ResumeLayout(false);

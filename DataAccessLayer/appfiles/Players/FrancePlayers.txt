@@ -4,7 +4,7 @@ Raphael VARANE;False;4;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Niko
 Samuel UMTITI;False;5;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Paul POGBA;False;6;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Antoine GRIEZMANN;False;7;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
-Kylian MBAPPE;False;10;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Kylian MBAPPE;False;10;Forward;True;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\mbappe.jfif
 Ousmane DEMBELE;False;11;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Corentin TOLISSO;False;12;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Ngolo KANTE;False;13;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
