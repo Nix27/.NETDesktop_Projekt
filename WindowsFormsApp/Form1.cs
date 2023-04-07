@@ -17,9 +17,11 @@ namespace WindowsFormsApp
         private static IList<Player> players;
         private static string selectedRepresentation;
         private IList<PlayerControl> selectedPlayerControls = new List<PlayerControl>();
-        private FileRepository<NationalTeam> ntRepo = new FileRepository<NationalTeam>(FilePaths.selectedTeamPath);
+        private FileRepository<NationalTeam> ntRepo;
         private FileRepository<Player> playerRepo;
-		public Form1()
+        private string championShip;
+
+        public Form1()
         {
             InitializeComponent();
         }
@@ -39,7 +41,7 @@ namespace WindowsFormsApp
             }
 
             var loadedAppSettings = fileRepo.LoadSingle();
-            string championShip = loadedAppSettings.Championship;
+            championShip = loadedAppSettings.Championship;
             string language = loadedAppSettings.Language;
 
             string methodForGetData = Utility.ReadConfig();
@@ -65,10 +67,23 @@ namespace WindowsFormsApp
             
             cmbRepresentation.Items.AddRange(allTeams.Select(t => t.ToString()).ToArray());
 
-            if (File.Exists(FilePaths.selectedTeamPath))
+            if (championShip == "Men")
             {
-                var loadedTeam = ntRepo.LoadSingle();
-                cmbRepresentation.SelectedItem = loadedTeam.ToString();
+                ntRepo = new FileRepository<NationalTeam>(FilePaths.selectedMenTeamPath);
+                if (File.Exists(FilePaths.selectedMenTeamPath))
+                {
+                    var loadedTeam = ntRepo.LoadSingle();
+                    cmbRepresentation.SelectedItem = loadedTeam.ToString();
+                }
+            }
+            else
+            {
+                ntRepo = new FileRepository<NationalTeam>(FilePaths.selectedWomenTeamPath);
+                if (File.Exists(FilePaths.selectedWomenTeamPath))
+                {
+                    var loadedTeam = ntRepo.LoadSingle();
+                    cmbRepresentation.SelectedItem = loadedTeam.ToString();
+                }
             }
 		}
 
@@ -83,7 +98,13 @@ namespace WindowsFormsApp
             ntRepo.SaveSingle(selectedCountry);
 
             string country = GetSelectedCountry(selectedRepresentation);
-            string path = FilePaths.playersPath + country + "Players.txt";
+            string path;
+
+            if (championShip == "Men")
+                path = FilePaths.menPlayersPath + country + "Players.txt";
+            else
+                path = FilePaths.womenPlayersPath + country + "Players.txt";
+
             playerRepo = new FileRepository<Player>(path);
 
             if(File.Exists(path))

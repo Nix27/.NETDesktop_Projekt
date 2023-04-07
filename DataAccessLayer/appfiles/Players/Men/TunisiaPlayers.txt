@@ -1,0 +1,23 @@
+Mouez HASSEN;False;22;Goalie;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Syam BEN YOUSSEF;False;2;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Yassine MERIAH;False;4;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Fakhreddine BEN YOUSSEF;False;8;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Anice BADRI;False;9;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Wahbi KHAZRI;True;10;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Dylan BRONN;False;11;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Ali MAALOUL;False;12;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Ferjani SASSI;False;13;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Ellyes SKHIRI;False;17;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Naim SLITI;False;23;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Farouk BEN MUSTAPHA;False;1;Goalie;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Saifeddine KHAOUI;False;7;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Aymen MATHLOUTHI;True;16;Goalie;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Oussama HADDADI;False;5;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Rami BEDOUI;False;6;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Ghaylen CHAALELI;False;20;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Hamdi NAGUEZ;False;21;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Yohan BEN ALOUANE;False;3;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Mohamed BEN AMOR;False;14;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Ahmed KHALIL;False;15;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Bassem SRARFI;False;18;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Saber KHALIFA;False;19;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg

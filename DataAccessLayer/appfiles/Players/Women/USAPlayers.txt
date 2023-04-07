@@ -1,0 +1,23 @@
+Alyssa NAEHER;False;1;Goalie;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Samantha MEWIS;False;3;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Kelley O HARA;False;5;Defender;True;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Abby DAHLKEMPER;False;7;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Julie ERTZ;False;8;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Lindsey HORAN;False;9;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Alex MORGAN;False;13;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Megan RAPINOE;True;15;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Rose LAVELLE;False;16;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Tobin HEATH;False;17;Forward;True;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Crystal DUNN;False;19;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Mallory PUGH;False;2;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Becky SAUERBRUNN;False;4;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Morgan BRIAN;False;6;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Carli LLOYD;True;10;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Ali KRIEGER;False;11;Defender;True;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Tierna DAVIDSON;False;12;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Christen PRESS;False;23;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Emily SONNETT;False;14;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Ashlyn HARRIS;False;18;Goalie;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Allie LONG;False;20;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Adrianna FRANCH;False;21;Goalie;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Jessica McDONALD;False;22;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
