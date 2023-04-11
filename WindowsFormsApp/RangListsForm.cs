@@ -86,7 +86,18 @@ namespace WindowsFormsApp
 
         private void btnCreatePdf_Click(object sender, EventArgs e)
         {
-            PdfDocument pdfDoc = new PdfDocument(new PdfWriter(FilePaths.pdfMatchesPath));
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "PDF Files (*.pdf)|*.pdf";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                CreatePdf(sfd.FileName);
+            }
+        }
+
+        private Document CreatePdf(string path)
+        {
+            PdfDocument pdfDoc = new PdfDocument(new PdfWriter(path));
             Document doc = new Document(pdfDoc);
 
             doc.Add(new Paragraph("Rank list of players"));
@@ -96,6 +107,8 @@ namespace WindowsFormsApp
             doc.Add(CreateTableForPrint(dgvMatches));
 
             doc.Close();
+
+            return doc;
         }
 
         private Table CreateTableForPrint(DataGridView dgv)

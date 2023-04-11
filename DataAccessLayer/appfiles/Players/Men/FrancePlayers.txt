@@ -1,4 +1,4 @@
-Hugo LLORIS;True;1;Goalie;True;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
+Hugo LLORIS;True;1;Goalie;True;..\..\..\..\DataAccessLayer\images\hugo lloris.jpg
 Benjamin PAVARD;False;2;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Raphael VARANE;False;4;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Samuel UMTITI;False;5;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
