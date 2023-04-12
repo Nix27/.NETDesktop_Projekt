@@ -11,20 +11,6 @@ namespace DataAccessLayer.Models
     {
         private const char Del = ';';
 
-        private readonly IList<string> championships = new List<string> { "Men", "Women" };
-
-        private IList<string> languages = new List<string> { "Croatian", "English" };
-
-        public IList<string> Championships
-        {
-            get => new List<string>(championships);
-        }
-
-        public IList<string> Languages
-        {
-            get => new List<string>(languages);
-        }
-
         public string Championship { get; set; }
         public string Language { get; set; }
 

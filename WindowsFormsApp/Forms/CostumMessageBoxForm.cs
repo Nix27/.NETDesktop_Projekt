@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DataAccessLayer.Models;
+using DataAccessLayer.Repositories;
+using DataAccessLayer.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,8 +15,26 @@ namespace WindowsFormsApp.Forms
 {
     public partial class CostumMessageBoxForm : Form
     {
+        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
         public CostumMessageBoxForm()
         {
+            InitializeComponent();
+            if (File.Exists(FilePaths.appSettingsPath))
+            {
+                var language = appSettingsRepo.LoadSingle().Language;
+                if (language == "Croatian" || language == "Hrvatski")
+                    ShowCulture("hr");
+                else
+                    ShowCulture("en");
+            }
+        }
+
+        private void ShowCulture(string culture)
+        {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
+
+            Controls.Clear();
             InitializeComponent();
         }
 

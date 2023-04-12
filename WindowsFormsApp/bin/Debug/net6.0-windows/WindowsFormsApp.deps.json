@@ -13,6 +13,14 @@
         },
         "runtime": {
           "WindowsFormsApp.dll": {}
+        },
+        "resources": {
+          "en/WindowsFormsApp.resources.dll": {
+            "locale": "en"
+          },
+          "hr/WindowsFormsApp.resources.dll": {
+            "locale": "hr"
+          }
         }
       },
       "itext7/7.2.5": {

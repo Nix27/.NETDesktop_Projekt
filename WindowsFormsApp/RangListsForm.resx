@@ -57,4 +57,243 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;HomeCountry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="dgvPlayers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>39, 103</value>
+  </data>
+  <data name="&gt;&gt;PlayerName.Name" xml:space="preserve">
+    <value>PlayerName</value>
+  </data>
+  <data name="&gt;&gt;dgvMatches.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dgvPlayers.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="dgvMatches.Size" type="System.Drawing.Size, System.Drawing">
+    <value>560, 386</value>
+  </data>
+  <data name="Attendance.HeaderText" xml:space="preserve">
+    <value>Broj posijetitelja</value>
+  </data>
+  <data name="&gt;&gt;dgvPlayers.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Profile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;YellowCards.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HomeCountry.HeaderText" xml:space="preserve">
+    <value>Domaćin</value>
+  </data>
+  <data name="&gt;&gt;Location.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCreatePdf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Attendance.Name" xml:space="preserve">
+    <value>Attendance</value>
+  </data>
+  <data name="Profile.HeaderText" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="Attendance.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="AwayCountry.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;dgvMatches.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="AwayCountry.HeaderText" xml:space="preserve">
+    <value>Gost</value>
+  </data>
+  <data name="&gt;&gt;YellowCards.Name" xml:space="preserve">
+    <value>YellowCards</value>
+  </data>
+  <data name="&gt;&gt;Attendance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="AwayCountry.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="dgvPlayers.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="Location.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;AwayCountry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PlayerName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvPlayers.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="Profile.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="HomeCountry.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;Goals.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Goals.HeaderText" xml:space="preserve">
+    <value>Golovi</value>
+  </data>
+  <data name="Attendance.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dgvMatches.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;dgvMatches.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCreatePdf.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="PlayerName.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="&gt;&gt;btnCreatePdf.Name" xml:space="preserve">
+    <value>btnCreatePdf</value>
+  </data>
+  <data name="Profile.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;Location.Name" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>RangListsForm</value>
+  </data>
+  <data name="dgvPlayers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>574, 386</value>
+  </data>
+  <data name="&gt;&gt;HomeCountry.Name" xml:space="preserve">
+    <value>HomeCountry</value>
+  </data>
+  <data name="&gt;&gt;dgvPlayers.Name" xml:space="preserve">
+    <value>dgvPlayers</value>
+  </data>
+  <data name="dgvMatches.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="Location.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="PlayerName.HeaderText" xml:space="preserve">
+    <value>Ime</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 20</value>
+  </data>
+  <data name="&gt;&gt;Goals.Name" xml:space="preserve">
+    <value>Goals</value>
+  </data>
+  <data name="&gt;&gt;btnCreatePdf.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;dgvPlayers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AwayCountry.Name" xml:space="preserve">
+    <value>AwayCountry</value>
+  </data>
+  <data name="btnCreatePdf.Text" xml:space="preserve">
+    <value>Kreiraj pdf</value>
+  </data>
+  <data name="HomeCountry.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="btnCreatePdf.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1031, 50</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dgvMatches.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 103</value>
+  </data>
+  <data name="btnCreatePdf.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1191, 537</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>RangListsForm</value>
+  </data>
+  <data name="Goals.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;dgvMatches.Name" xml:space="preserve">
+    <value>dgvMatches</value>
+  </data>
+  <data name="YellowCards.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="Location.HeaderText" xml:space="preserve">
+    <value>Lokacija</value>
+  </data>
+  <data name="btnCreatePdf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 36</value>
+  </data>
+  <data name="YellowCards.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;Profile.Name" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="PlayerName.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="YellowCards.HeaderText" xml:space="preserve">
+    <value>Žuti kartoni</value>
+  </data>
+  <data name="Goals.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Attendance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="PlayerName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Profile.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="AwayCountry.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="YellowCards.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="HomeCountry.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, System.Private.CoreLib, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+    <value>hr</value>
+  </metadata>
+  <metadata name="Location.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Goals.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

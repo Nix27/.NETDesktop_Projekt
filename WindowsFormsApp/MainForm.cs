@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DataAccessLayer.Models;
+using DataAccessLayer.Repositories;
+using DataAccessLayer.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,8 +16,39 @@ namespace WindowsFormsApp
     public partial class MainForm : Form
     {
         private Form activeForm;
+        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
+        private Settings formSettings = new Settings();
         public MainForm()
         {
+            InitializeComponent();
+
+            if (!File.Exists(FilePaths.appSettingsPath))
+            {
+                if (formSettings.ShowDialog() == DialogResult.OK)
+                {
+                    var appSettingsForSave = formSettings.GetSettings();
+                    appSettingsRepo.SaveSingle(appSettingsForSave);
+                }
+            }
+
+            var language = appSettingsRepo.LoadSingle().Language;
+            if(language == "Croatian" || language == "Hrvatski")
+            {
+                ShowCulture("hr");
+            }
+            else
+            {
+                ShowCulture("en");
+            }
+            
+        }
+
+        private void ShowCulture(string culture)
+        {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
+
+            Controls.Clear();
             InitializeComponent();
         }
 

@@ -5,6 +5,7 @@ using DataAccessLayer.Utilities;
 using Microsoft.Win32;
 using System.Net.WebSockets;
 using System.Numerics;
+using System.Runtime.InteropServices.ObjectiveC;
 
 namespace WindowsFormsApp
 {
@@ -26,23 +27,32 @@ namespace WindowsFormsApp
             InitializeComponent();
         }
 
+        private void ShowCulture(string culture)
+        {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
+
+            Controls.Clear();
+            InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+        }
+
         private async void Form1_Load(object sender, EventArgs e)
         {
             var fileRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
 
-            if (!File.Exists(FilePaths.appSettingsPath))
-            {
-                var result = formSettings.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    var appSettingsForSave = formSettings.GetSettings();
-                    fileRepo.SaveSingle(appSettingsForSave);
-                } 
-            }
-
             var loadedAppSettings = fileRepo.LoadSingle();
             championShip = loadedAppSettings.Championship;
             string language = loadedAppSettings.Language;
+
+            if (language == "Croatian" || language == "Hrvatski")
+            {
+                ShowCulture("hr");
+            }
+            else
+            {
+                ShowCulture("en");
+            }
 
             string methodForGetData = Utility.ReadConfig();
             string urlForTeams = "";
@@ -50,16 +60,18 @@ namespace WindowsFormsApp
 
             if(methodForGetData == "API")
             {
-                urlForTeams = championShip == "Men" ? Links.menAllTeamsLink : Links.womenAllTeamsLink;
-                urlForMatches = championShip == "Men" ? Links.menAllMatchesLink : Links.womenAllMatchesLink;
+                urlForTeams = championShip == "Men" || championShip == "Muško" ? Links.menAllTeamsLink : Links.womenAllTeamsLink;
+                urlForMatches = championShip == "Men" || championShip == "Muško" ? Links.menAllMatchesLink : Links.womenAllMatchesLink;
 
+                pbLoader.Visible = true;
                 allTeams = await repoFetch.GetFromApi<NationalTeam>(urlForTeams);
                 allMatches = await repoFetch.GetFromApi<Match>(urlForMatches);
+                pbLoader.Visible = false;
             }
             else if(methodForGetData == "JSON")
             {
-                urlForTeams = championShip == "Men" ? Links.menAllTeamsJson : Links.womenAllTeamsJson;
-                urlForMatches = championShip == "Men" ? Links.menAllMatchesJson : Links.womenAllMatchesJson;
+                urlForTeams = championShip == "Men" || championShip == "Muško" ? Links.menAllTeamsJson : Links.womenAllTeamsJson;
+                urlForMatches = championShip == "Men" || championShip == "Muško" ? Links.menAllMatchesJson : Links.womenAllMatchesJson;
 
                 allTeams = repoFetch.GetFromJson<NationalTeam>(urlForTeams);
                 allMatches = repoFetch.GetFromJson<Match>(urlForMatches);
@@ -67,7 +79,7 @@ namespace WindowsFormsApp
             
             cmbRepresentation.Items.AddRange(allTeams.Select(t => t.ToString()).ToArray());
 
-            if (championShip == "Men")
+            if (championShip == "Men" || championShip == "Muško")
             {
                 ntRepo = new FileRepository<NationalTeam>(FilePaths.selectedMenTeamPath);
                 if (File.Exists(FilePaths.selectedMenTeamPath))
@@ -100,7 +112,7 @@ namespace WindowsFormsApp
             string country = GetSelectedCountry(selectedRepresentation);
             string path;
 
-            if (championShip == "Men")
+            if (championShip == "Men" || championShip == "Muško")
                 path = FilePaths.menPlayersPath + country + "Players.txt";
             else
                 path = FilePaths.womenPlayersPath + country + "Players.txt";

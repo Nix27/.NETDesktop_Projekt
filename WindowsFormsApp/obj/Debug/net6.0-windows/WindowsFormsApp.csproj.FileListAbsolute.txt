@@ -44,3 +44,17 @@ C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\bin
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\bin\Debug\net6.0-windows\Microsoft.Extensions.Primitives.dll
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\bin\Debug\net6.0-windows\BouncyCastle.Crypto.dll
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.Forms.CostumMessageBoxForm.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\bin\Debug\net6.0-windows\en\WindowsFormsApp.resources.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\bin\Debug\net6.0-windows\hr\WindowsFormsApp.resources.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.Form1.en.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.Form1.hr.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\en\WindowsFormsApp.resources.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\hr\WindowsFormsApp.resources.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.RangListsForm.hr.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.RangListsForm.en.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.MainForm.en.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.MainForm.hr.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.Settings.hr.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.Settings.en.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.Forms.CostumMessageBoxForm.en.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WindowsFormsApp\obj\Debug\net6.0-windows\WindowsFormsApp.Forms.CostumMessageBoxForm.hr.resources

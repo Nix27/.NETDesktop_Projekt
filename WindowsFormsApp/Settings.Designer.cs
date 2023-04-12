@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.lblChampion = new System.Windows.Forms.Label();
             this.cmbChampionships = new System.Windows.Forms.ComboBox();
             this.lblLanguage = new System.Windows.Forms.Label();
@@ -37,62 +38,50 @@
             // 
             // lblChampion
             // 
-            this.lblChampion.AutoSize = true;
-            this.lblChampion.Location = new System.Drawing.Point(20, 59);
+            resources.ApplyResources(this.lblChampion, "lblChampion");
             this.lblChampion.Name = "lblChampion";
-            this.lblChampion.Size = new System.Drawing.Size(80, 20);
-            this.lblChampion.TabIndex = 0;
-            this.lblChampion.Text = "Champion:";
             // 
             // cmbChampionships
             // 
+            resources.ApplyResources(this.cmbChampionships, "cmbChampionships");
             this.cmbChampionships.FormattingEnabled = true;
-            this.cmbChampionships.Location = new System.Drawing.Point(126, 56);
+            this.cmbChampionships.Items.AddRange(new object[] {
+            resources.GetString("cmbChampionships.Items"),
+            resources.GetString("cmbChampionships.Items1")});
             this.cmbChampionships.Name = "cmbChampionships";
-            this.cmbChampionships.Size = new System.Drawing.Size(207, 28);
-            this.cmbChampionships.TabIndex = 1;
             // 
             // lblLanguage
             // 
-            this.lblLanguage.AutoSize = true;
-            this.lblLanguage.Location = new System.Drawing.Point(20, 122);
+            resources.ApplyResources(this.lblLanguage, "lblLanguage");
             this.lblLanguage.Name = "lblLanguage";
-            this.lblLanguage.Size = new System.Drawing.Size(77, 20);
-            this.lblLanguage.TabIndex = 2;
-            this.lblLanguage.Text = "Language:";
             // 
             // cmbLanguages
             // 
+            resources.ApplyResources(this.cmbLanguages, "cmbLanguages");
             this.cmbLanguages.FormattingEnabled = true;
-            this.cmbLanguages.Location = new System.Drawing.Point(126, 119);
+            this.cmbLanguages.Items.AddRange(new object[] {
+            resources.GetString("cmbLanguages.Items"),
+            resources.GetString("cmbLanguages.Items1")});
             this.cmbLanguages.Name = "cmbLanguages";
-            this.cmbLanguages.Size = new System.Drawing.Size(207, 28);
-            this.cmbLanguages.TabIndex = 3;
             // 
             // btnOk
             // 
+            resources.ApplyResources(this.btnOk, "btnOk");
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(126, 170);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(94, 29);
-            this.btnOk.TabIndex = 4;
-            this.btnOk.Text = "Apply";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // Settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 246);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.cmbLanguages);
             this.Controls.Add(this.lblLanguage);
             this.Controls.Add(this.cmbChampionships);
             this.Controls.Add(this.lblChampion);
             this.Name = "Settings";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Settings";
             this.Load += new System.EventHandler(this.Settings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

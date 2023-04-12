@@ -1,4 +1,6 @@
-﻿using DataAccessLayer.Utilities;
+﻿using DataAccessLayer.Models;
+using DataAccessLayer.Repositories;
+using DataAccessLayer.Utilities;
 using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout;
@@ -18,6 +20,7 @@ namespace WindowsFormsApp
     public partial class RangListsForm : Form
     {
         private Form1 f1 = new Form1();
+        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
         public RangListsForm()
         {
             InitializeComponent();
@@ -25,18 +28,34 @@ namespace WindowsFormsApp
 
         private void RangListsForm_Load(object sender, EventArgs e)
         {
+            var language = appSettingsRepo.LoadSingle().Language;
+
+            if(language == "Croatian" || language == "Hrvatski")
+            {
+                ShowCulture("hr");
+            }
+            else
+            {
+                ShowCulture("en");
+            }
+
             ShowPlayersRankList();
             ShowMatchesRankList();
+        }
+
+        private void ShowCulture(string culture)
+        {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
+
+            Controls.Clear();
+            InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
         }
 
         private void ShowPlayersRankList()
         {
             var rankedPlayers = f1.GetRankedPlayers();
-
-            dgvPlayers.Columns.Add("Profile", "Profile");
-            dgvPlayers.Columns.Add("Name", "Name");
-            dgvPlayers.Columns.Add("Goals", "Goals");
-            dgvPlayers.Columns.Add("YellowCards", "Yellow cards");
 
             foreach (var player in rankedPlayers)
             {
@@ -66,19 +85,16 @@ namespace WindowsFormsApp
         {
             var rankedMatches = f1.GetRankedMatches();
 
-            DataTable rankedMatchesTable = new DataTable();
-
-            rankedMatchesTable.Columns.Add("Location", typeof(string));
-            rankedMatchesTable.Columns.Add("Attendance", typeof(int));
-            rankedMatchesTable.Columns.Add("Home country", typeof(string));
-            rankedMatchesTable.Columns.Add("Away country", typeof(string));
-
             foreach (var match in rankedMatches)
             {
-                rankedMatchesTable.Rows.Add(match.Location, match.Attendance, match.HomeCountry, match.AwayCountry);
-            }
+                DataGridViewRow row = new DataGridViewRow();
+                row.Cells.Add(new DataGridViewTextBoxCell { Value = match.Location });
+                row.Cells.Add(new DataGridViewTextBoxCell { Value = match.Attendance });
+                row.Cells.Add(new DataGridViewTextBoxCell { Value = match.HomeCountry });
+                row.Cells.Add(new DataGridViewTextBoxCell { Value = match.AwayCountry });
 
-            dgvMatches.DataSource = rankedMatchesTable;
+                dgvMatches.Rows.Add(row);
+            }
 
             dgvMatches.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvMatches.BorderStyle = BorderStyle.None;

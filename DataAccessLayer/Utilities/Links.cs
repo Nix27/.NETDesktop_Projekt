@@ -15,9 +15,9 @@ namespace DataAccessLayer.Utilities
         public const string womenAllMatchesLink = "https://worldcup-vua.nullbit.hr/women/matches";
 
         //JSON
-        public const string menAllTeamsJson = @"C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\json\men\results.json";
-        public const string womenAllTeamsJson = @"C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\json\women\results.json";
-        public const string menAllMatchesJson = @"C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\json\men\matches.json";
-        public const string womenAllMatchesJson = @"C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\json\women\matches.json";
+        public const string menAllTeamsJson = @"..\..\..\..\DataAccessLayer\json\men\results.json";
+        public const string womenAllTeamsJson = @"..\..\..\..\DataAccessLayer\json\women\results.json";
+        public const string menAllMatchesJson = @"..\..\..\..\DataAccessLayer\json\men\matches.json";
+        public const string womenAllMatchesJson = @"..\..\..\..\DataAccessLayer\json\women\matches.json";
     }
 }

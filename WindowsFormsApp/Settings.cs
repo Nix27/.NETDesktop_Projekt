@@ -33,20 +33,28 @@ namespace WindowsFormsApp
 
         private void Settings_Load(object sender, EventArgs e)
         {
-            AppSettings aps = new AppSettings();
-            cmbChampionships.Items.AddRange(aps.Championships.ToArray());
-            cmbLanguages.Items.AddRange(aps.Languages.ToArray());
-
             if (File.Exists(FilePaths.appSettingsPath))
             {
                 var appSettings = settingsRepo.LoadSingle();
                 cmbChampionships.SelectedItem = appSettings.Championship;
                 cmbLanguages.SelectedItem = appSettings.Language;
+
+                var language = settingsRepo.LoadSingle().Language;
+                if (language == "Croatian" || language == "Hrvatski")
+                {
+                    ShowCulture("hr");
+                }
+                else
+                {
+                    ShowCulture("en");
+                }
             }
             else
             {
                 cmbChampionships.SelectedIndex = 0;
                 cmbLanguages.SelectedIndex = 0;
+
+                ShowCulture("en");
             }
         }
 
@@ -63,6 +71,29 @@ namespace WindowsFormsApp
                 var appSettings = GetSettings();
                 settingsRepo.SaveSingle(appSettings);
             }
+
+            var language = settingsRepo.LoadSingle().Language;
+            if(language == "Croatian" || language == "Hrvatski")
+            {
+                ShowCulture("hr");
+            }
+            else
+            {
+                ShowCulture("en");
+            }
+
+            cmbChampionships.SelectedIndex = 0;
+            cmbLanguages.SelectedIndex = 0;
+        }
+
+        private void ShowCulture(string culture)
+        {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
+
+            Controls.Clear();
+            InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
         }
     }
 }
