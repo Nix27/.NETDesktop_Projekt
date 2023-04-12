@@ -2,6 +2,7 @@
 using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using DataAccessLayer.Utilities;
+using iText.Kernel.Pdf.Layer;
 using Microsoft.Win32;
 using System.Net.WebSockets;
 using System.Numerics;
@@ -12,22 +13,30 @@ namespace WindowsFormsApp
     public partial class Form1 : Form
     {
         private readonly IRepositoryFetch repoFetch = new RepositoryFetch();
-        private Settings formSettings = new Settings();
 		private IList<NationalTeam> allTeams;
         private static IList<Match> allMatches;
         private static IList<Player> players;
-        private static string selectedRepresentation;
         private IList<PlayerControl> selectedPlayerControls = new List<PlayerControl>();
         private FileRepository<NationalTeam> ntRepo;
         private FileRepository<Player> playerRepo;
         private string championShip;
+        private static NationalTeam selectedCountry;
+        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
 
         public Form1()
         {
-            InitializeComponent();
+            string language = appSettingsRepo.LoadSingle().Language;
+            if (language == "Croatian" || language == "Hrvatski")
+            {
+                SetLanguage("hr");
+            }
+            else
+            {
+                SetLanguage("en");
+            }
         }
 
-        private void ShowCulture(string culture)
+        private void SetLanguage(string culture)
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
@@ -39,22 +48,10 @@ namespace WindowsFormsApp
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            var fileRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
-
-            var loadedAppSettings = fileRepo.LoadSingle();
+            var loadedAppSettings = appSettingsRepo.LoadSingle();
             championShip = loadedAppSettings.Championship;
-            string language = loadedAppSettings.Language;
 
-            if (language == "Croatian" || language == "Hrvatski")
-            {
-                ShowCulture("hr");
-            }
-            else
-            {
-                ShowCulture("en");
-            }
-
-            string methodForGetData = Utility.ReadConfig();
+            string methodForGetData = ConfigUtility.ReadConfig();
             string urlForTeams = "";
             string urlForMatches = "";
 
@@ -81,35 +78,34 @@ namespace WindowsFormsApp
 
             if (championShip == "Men" || championShip == "Muško")
             {
-                ntRepo = new FileRepository<NationalTeam>(FilePaths.selectedMenTeamPath);
-                if (File.Exists(FilePaths.selectedMenTeamPath))
-                {
-                    var loadedTeam = ntRepo.LoadSingle();
-                    cmbRepresentation.SelectedItem = loadedTeam.ToString();
-                }
+                LoadSavedTeam(FilePaths.selectedMenTeamPath);
             }
             else
             {
-                ntRepo = new FileRepository<NationalTeam>(FilePaths.selectedWomenTeamPath);
-                if (File.Exists(FilePaths.selectedWomenTeamPath))
-                {
-                    var loadedTeam = ntRepo.LoadSingle();
-                    cmbRepresentation.SelectedItem = loadedTeam.ToString();
-                }
+                LoadSavedTeam(FilePaths.selectedWomenTeamPath);
             }
 		}
+
+        private void LoadSavedTeam(string path)
+        {
+            ntRepo = new FileRepository<NationalTeam>(path);
+            if (File.Exists(path))
+            {
+                var loadedTeam = ntRepo.LoadSingle();
+                cmbRepresentation.SelectedItem = loadedTeam.ToString();
+            }
+        }
 
 		private void cmbRepresentation_SelectedIndexChanged(object sender, EventArgs e)
 		{
             selectedPlayerControls.Clear();
+            flpPlayers.Controls.Clear();
             flpFavouritePlayers.Controls.Clear();
 
-            selectedRepresentation = cmbRepresentation.SelectedItem.ToString();
-
-            var selectedCountry = allTeams.ToArray()[cmbRepresentation.SelectedIndex];
+            selectedCountry = allTeams.ToArray()[cmbRepresentation.SelectedIndex];
             ntRepo.SaveSingle(selectedCountry);
 
-            string country = GetSelectedCountry(selectedRepresentation);
+            string country = selectedCountry.Country;
             string path;
 
             if (championShip == "Men" || championShip == "Muško")
@@ -122,25 +118,13 @@ namespace WindowsFormsApp
             if(File.Exists(path))
                 players = playerRepo.LoadMultiple();
             else
-               players = Utility.GetPlayersBasedOnFifaCode(allMatches, selectedRepresentation);
-
-            if(flpPlayers.Controls.Count > 0) flpPlayers.Controls.Clear();
+               players = PlayersUtility.GetPlayersBasedOnFifaCode(allMatches, selectedCountry.FifaCode);
 
             foreach(var player in players)
             {
-                PlayerControl pc = new PlayerControl();
-                pc.Profile = Image.FromFile(player.ProfileUrl);
-                pc.PlayerName = player.Name;
-                pc.Number = player.ShirtNumber;
-                pc.Position = player.Position;
-                pc.Captain = player.Captain;
-                pc.MouseClick += playerControl_MouseClick;
-                pc.MouseMove += playerControl_MouseMove;
+                PlayerControl pc = CreatePlayerControl(player);
 
-                foreach(var pb in pc.Controls.OfType<PictureBox>())
-                {
-                    pb.MouseClick += pbPlayerProfile_MouseClick;
-                }
+                pc.Controls.OfType<PictureBox>().ToList().ForEach(pb => pb.MouseClick += pbPlayerProfile_MouseClick);
 
                 if (player.IsFavorite)
                     flpFavouritePlayers.Controls.Add(pc);
@@ -149,19 +133,28 @@ namespace WindowsFormsApp
             }
 		}
 
+        private PlayerControl CreatePlayerControl(Player player)
+        {
+            PlayerControl pc = new PlayerControl();
+            pc.Profile = Image.FromFile(player.ProfileUrl);
+            pc.PlayerName = player.Name;
+            pc.Number = player.ShirtNumber;
+            pc.Position = player.Position;
+            pc.Captain = player.Captain;
+            pc.MouseClick += playerControl_MouseClick;
+            pc.MouseMove += playerControl_MouseMove;
+
+            return pc;
+        }
+
         public IEnumerable<RankedPlayer> GetRankedPlayers()
         {
-            return Utility.GetPlayersForRanking(allMatches, players);
+            return PlayersUtility.GetPlayersForRanking(allMatches, players);
         }
 
         public IEnumerable<RankedMatch> GetRankedMatches()
         {
-            return Utility.GetRankedMatches(allMatches, selectedRepresentation);
-        }
-
-        private string GetSelectedCountry(string selectedItem)
-        {
-            return selectedItem.Split(' ')[0];
+            return PlayersUtility.GetRankedMatches(allMatches, selectedCountry.FifaCode);
         }
 
         private void playerControl_MouseClick(object sender, MouseEventArgs e)

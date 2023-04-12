@@ -18,18 +18,19 @@ namespace WindowsFormsApp.Forms
         private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
         public CostumMessageBoxForm()
         {
-            InitializeComponent();
             if (File.Exists(FilePaths.appSettingsPath))
             {
                 var language = appSettingsRepo.LoadSingle().Language;
                 if (language == "Croatian" || language == "Hrvatski")
-                    ShowCulture("hr");
+                    SetLanguage("hr");
                 else
-                    ShowCulture("en");
+                    SetLanguage("en");
             }
+            else
+                InitializeComponent();
         }
 
-        private void ShowCulture(string culture)
+        private void SetLanguage(string culture)
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);

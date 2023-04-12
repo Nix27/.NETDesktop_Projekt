@@ -18,10 +18,9 @@ namespace WindowsFormsApp
         private Form activeForm;
         private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
         private Settings formSettings = new Settings();
+        string language;
         public MainForm()
         {
-            InitializeComponent();
-
             if (!File.Exists(FilePaths.appSettingsPath))
             {
                 if (formSettings.ShowDialog() == DialogResult.OK)
@@ -31,19 +30,19 @@ namespace WindowsFormsApp
                 }
             }
 
-            var language = appSettingsRepo.LoadSingle().Language;
+            language = appSettingsRepo.LoadSingle().Language;
             if(language == "Croatian" || language == "Hrvatski")
             {
-                ShowCulture("hr");
+                SetLanguage("hr");
             }
             else
             {
-                ShowCulture("en");
+                SetLanguage("en");
             }
             
         }
 
-        private void ShowCulture(string culture)
+        private void SetLanguage(string culture)
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
@@ -52,7 +51,7 @@ namespace WindowsFormsApp
             InitializeComponent();
         }
 
-        private void OpenNewForm(Form childForm, object sender)
+        private void OpenNewForm(Form childForm)
         {
             if(activeForm != null) activeForm.Close();
 
@@ -67,29 +66,33 @@ namespace WindowsFormsApp
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-            OpenNewForm(new Form1(), sender);
+            OpenNewForm(new Form1());
         }
 
         private void btnRangLists_Click(object sender, EventArgs e)
         {
-            OpenNewForm(new RangListsForm(), sender);
+            OpenNewForm(new RangListsForm());
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            OpenNewForm(new Settings(), sender);
+            OpenNewForm(new Settings());
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            OpenNewForm(new Form1(), sender);
+            OpenNewForm(new Form1());
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Forms.CostumMessageBoxForm msgBoxFrom = new Forms.CostumMessageBoxForm();
 
-            msgBoxFrom.SetTitleAndQuestion("Exit", "Are you sure you want to exit the application?");
+            if(language == "Croatian" || language == "Hrvatski")
+                msgBoxFrom.SetTitleAndQuestion("Izlaz", "Jeste li sigurni da želite izaći iz aplikacije?");
+            else
+                msgBoxFrom.SetTitleAndQuestion("Exit", "Are you sure you want to exit the application?");
+
             msgBoxFrom.AcceptButton = msgBoxFrom.Controls.Find("btnYes", false).FirstOrDefault() as Button;
             msgBoxFrom.CancelButton = msgBoxFrom.Controls.Find("btnNo", false).FirstOrDefault() as Button;
 

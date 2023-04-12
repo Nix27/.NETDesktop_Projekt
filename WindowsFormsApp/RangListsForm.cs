@@ -23,27 +23,24 @@ namespace WindowsFormsApp
         private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
         public RangListsForm()
         {
-            InitializeComponent();
+            var language = appSettingsRepo.LoadSingle().Language;
+            if (language == "Croatian" || language == "Hrvatski")
+            {
+                SetLanguage("hr");
+            }
+            else
+            {
+                SetLanguage("en");
+            }
         }
 
         private void RangListsForm_Load(object sender, EventArgs e)
         {
-            var language = appSettingsRepo.LoadSingle().Language;
-
-            if(language == "Croatian" || language == "Hrvatski")
-            {
-                ShowCulture("hr");
-            }
-            else
-            {
-                ShowCulture("en");
-            }
-
             ShowPlayersRankList();
             ShowMatchesRankList();
         }
 
-        private void ShowCulture(string culture)
+        private void SetLanguage(string culture)
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
@@ -140,20 +137,18 @@ namespace WindowsFormsApp
             {
                 foreach (DataGridViewCell cell in row.Cells)
                 {
-                    if (cell.Value != null)
-                    {
-                        if (cell.ValueType == typeof(System.Drawing.Image))
-                        {
-                            ImageData imageData = ImageDataFactory.Create(cell.Tag.ToString());
-                            iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData);
-                            image = image.ScaleToFit(70, 70);
-                            tbl.AddCell(new Cell().Add(image));
-                        }
-                        else
-                        {
-                            tbl.AddCell(new Cell().Add(new Paragraph(cell.Value.ToString())));
-                        }
-                    }
+                     if (cell.ValueType == typeof(System.Drawing.Image))
+                     {
+                         ImageData imageData = ImageDataFactory.Create(cell.Tag.ToString());
+                         iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData);
+                         image = image.ScaleToFit(70, 70);
+                         tbl.AddCell(new Cell().Add(image));
+                     }
+                     else
+                     {
+                         tbl.AddCell(new Cell().Add(new Paragraph(cell.Value.ToString())));
+                     }
+                    
                 }
             }
 

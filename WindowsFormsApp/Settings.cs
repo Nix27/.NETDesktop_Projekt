@@ -16,6 +16,7 @@ namespace WindowsFormsApp
     public partial class Settings : Form
     {
         private FileRepository<AppSettings> settingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
+        string language;
 
         public Settings()
         {
@@ -36,25 +37,25 @@ namespace WindowsFormsApp
             if (File.Exists(FilePaths.appSettingsPath))
             {
                 var appSettings = settingsRepo.LoadSingle();
-                cmbChampionships.SelectedItem = appSettings.Championship;
-                cmbLanguages.SelectedItem = appSettings.Language;
-
-                var language = settingsRepo.LoadSingle().Language;
+                language = appSettings.Language;
                 if (language == "Croatian" || language == "Hrvatski")
                 {
-                    ShowCulture("hr");
+                    SetLanguage("hr");
                 }
                 else
                 {
-                    ShowCulture("en");
+                    SetLanguage("en");
                 }
+
+                cmbChampionships.SelectedItem = appSettings.Championship;
+                cmbLanguages.SelectedItem = appSettings.Language;
             }
             else
             {
+                SetLanguage("en");
+
                 cmbChampionships.SelectedIndex = 0;
                 cmbLanguages.SelectedIndex = 0;
-
-                ShowCulture("en");
             }
         }
 
@@ -62,31 +63,35 @@ namespace WindowsFormsApp
         {
             Forms.CostumMessageBoxForm msgBoxForm = new Forms.CostumMessageBoxForm();
 
-            msgBoxForm.SetTitleAndQuestion("Change settings", "Are sure you want to change the settings?");
+            if(language == "Croatian" || language == "Hrvatski")
+                msgBoxForm.SetTitleAndQuestion("Promjena postavki", "Jeste li sigurni da želite promijeniti postavke?");
+            else
+                msgBoxForm.SetTitleAndQuestion("Change settings", "Are sure you want to change the settings?");
+
             msgBoxForm.AcceptButton = msgBoxForm.Controls.Find("btnYes", false).FirstOrDefault() as Button;
             msgBoxForm.CancelButton = msgBoxForm.Controls.Find("btnNo", false).FirstOrDefault() as Button;
 
-            if(msgBoxForm.ShowDialog() == DialogResult.OK)
+            var appSettings = GetSettings();
+            if (msgBoxForm.ShowDialog() == DialogResult.OK)
             {
-                var appSettings = GetSettings();
                 settingsRepo.SaveSingle(appSettings);
             }
 
-            var language = settingsRepo.LoadSingle().Language;
+            language = appSettings.Language;
             if(language == "Croatian" || language == "Hrvatski")
             {
-                ShowCulture("hr");
+                SetLanguage("hr");
             }
             else
             {
-                ShowCulture("en");
+                SetLanguage("en");
             }
 
-            cmbChampionships.SelectedIndex = 0;
-            cmbLanguages.SelectedIndex = 0;
+            cmbChampionships.SelectedItem = appSettings.Championship;
+            cmbLanguages.SelectedItem = appSettings.Language;
         }
 
-        private void ShowCulture(string culture)
+        private void SetLanguage(string culture)
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
