@@ -33,12 +33,6 @@ namespace DataAccessLayer.Utilities
             return players.ToList();
         }
 
-        private static string GetFifaCode(string s)
-        {
-            string code = s.Split('(')[1];
-            return s.Split('(')[1].Substring(0, code.Length - 1);
-        }
-
         public static IEnumerable<RankedPlayer> GetPlayersForRanking(IList<Match> matches, IList<Player> players)
         {
             IList<TeamEvent> teamEvents = new List<TeamEvent>();

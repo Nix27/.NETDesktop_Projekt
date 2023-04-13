@@ -24,16 +24,24 @@ namespace WindowsFormsApp
         public RangListsForm()
         {
             var language = appSettingsRepo.LoadSingle().Language;
-            LanguageUtility.SetNewLanguage(language, SetLanguage);
+            LanguageUtility.SetNewLanguage(language, SetCulture);
         }
 
         private void RangListsForm_Load(object sender, EventArgs e)
         {
-            ShowPlayersRankList();
-            ShowMatchesRankList();
+            try
+            {
+                ShowPlayersRankList();
+                ShowMatchesRankList();
+            }
+            catch
+            {
+                MessageBox.Show("Please choose representation from start page!");
+                return;
+            }
         }
 
-        private void SetLanguage(string culture)
+        private void SetCulture(string culture)
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);

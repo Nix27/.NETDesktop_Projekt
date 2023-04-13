@@ -39,13 +39,13 @@ namespace WindowsFormsApp
             {
                 var appSettings = settingsRepo.LoadSingle();
                 language = appSettings.Language;
-                LanguageUtility.SetNewLanguage(language, SetLanguage);
+                LanguageUtility.SetNewLanguage(language, SetCulture);
 
                 SetComboBoxes(appSettings.Championship, language, appSettings);
             }
             else
             {
-                SetLanguage("en");
+                SetCulture("en");
 
                 cmbChampionships.SelectedIndex = 0;
                 cmbLanguages.SelectedIndex = 0;
@@ -71,7 +71,7 @@ namespace WindowsFormsApp
                 settingsRepo.SaveSingle(appSettings);
 
                 language = appSettings.Language;
-                LanguageUtility.SetNewLanguage(language, SetLanguage);
+                LanguageUtility.SetNewLanguage(language, SetCulture);
 
                 SetComboBoxes(appSettings.Championship, language, appSettings);
 
@@ -80,7 +80,7 @@ namespace WindowsFormsApp
             }
         }
 
-        private void SetLanguage(string culture)
+        private void SetCulture(string culture)
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);

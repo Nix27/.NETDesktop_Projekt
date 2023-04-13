@@ -32,18 +32,18 @@ namespace WindowsFormsApp
             }
 
             language = appSettingsRepo.LoadSingle().Language;
-            LanguageUtility.SetNewLanguage(language, SetLanguage);
+            LanguageUtility.SetNewLanguage(language, SetCulture);
         }
 
         private void FormSettings_OnLanguageChanged(object? sender, DataAccessLayer.Events.LanguageChangedEventArgs e)
         {
-            SetLanguage(e.Culture);
+            SetCulture(e.Culture);
             Settings frmSettings = new Settings();
             frmSettings.OnLanguageChanged += FormSettings_OnLanguageChanged;
             OpenNewForm(frmSettings);
         }
 
-        public void SetLanguage(string culture)
+        public void SetCulture(string culture)
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
@@ -91,7 +91,7 @@ namespace WindowsFormsApp
         {
             Forms.CostumMessageBoxForm msgBoxFrom = new Forms.CostumMessageBoxForm();
 
-            if(language == "Croatian" || language == "Hrvatski")
+            if (language == "Croatian" || language == "Hrvatski")
                 msgBoxFrom.SetTitleAndQuestion("Izlaz", "Jeste li sigurni da želite izaći iz aplikacije?");
             else
                 msgBoxFrom.SetTitleAndQuestion("Exit", "Are you sure you want to exit the application?");

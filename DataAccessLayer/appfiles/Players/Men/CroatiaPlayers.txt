@@ -1,11 +1,11 @@
-Danijel SUBASIC;False;23;Goalie;False;..\..\..\..\DataAccessLayer\images\defaultProfilePic.jpg
+Danijel SUBASIC;False;23;Goalie;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Sime VRSALJKO;False;2;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Ivan STRINIC;False;3;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
-Ivan PERISIC;False;4;Forward;True;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\ivanperisic.jfif
+Ivan PERISIC;False;4;Forward;True;..\..\..\..\DataAccessLayer\images\ivanperisic.jfif
 Dejan LOVREN;False;6;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Ivan RAKITIC;False;7;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Andrej KRAMARIC;False;9;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
-Luka MODRIC;True;10;Midfield;True;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\lukamodric.jfif
+Luka MODRIC;True;10;Midfield;True;..\..\..\..\DataAccessLayer\images\lukamodric.jfif
 Mario MANDZUKIC;False;17;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Ante REBIC;False;18;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Domagoj VIDA;False;21;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
@@ -18,6 +18,6 @@ Duje CALETA-CAR;False;15;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Ni
 Milan BADELJ;False;19;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Marko PJACA;False;20;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Josip PIVARIC;False;22;Defender;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
-Dominik LIVAKOVIC;False;1;Goalie;True;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\dominiklivakovic.jfif
+Dominik LIVAKOVIC;False;1;Goalie;True;..\..\..\..\DataAccessLayer\images\dominiklivakovic.jfif
 Filip BRADARIC;False;14;Midfield;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
 Nikola KALINIC;False;16;Forward;False;C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg
