@@ -55,8 +55,10 @@
             // 
             // CostumMessageBoxForm
             // 
+            this.AcceptButton = this.btnYes;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnNo;
             this.Controls.Add(this.btnNo);
             this.Controls.Add(this.btnYes);
             this.Controls.Add(this.lblQuestion);
