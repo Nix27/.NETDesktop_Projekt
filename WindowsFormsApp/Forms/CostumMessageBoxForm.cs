@@ -21,10 +21,7 @@ namespace WindowsFormsApp.Forms
             if (File.Exists(FilePaths.appSettingsPath))
             {
                 var language = appSettingsRepo.LoadSingle().Language;
-                if (language == "Croatian" || language == "Hrvatski")
-                    SetLanguage("hr");
-                else
-                    SetLanguage("en");
+                LanguageUtility.SetNewLanguage(language, SetLanguage);
             }
             else
                 InitializeComponent();

@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Models;
+﻿using DataAccessLayer.Events;
+using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using DataAccessLayer.Utilities;
 using System;
@@ -38,17 +39,9 @@ namespace WindowsFormsApp
             {
                 var appSettings = settingsRepo.LoadSingle();
                 language = appSettings.Language;
-                if (language == "Croatian" || language == "Hrvatski")
-                {
-                    SetLanguage("hr");
-                }
-                else
-                {
-                    SetLanguage("en");
-                }
+                LanguageUtility.SetNewLanguage(language, SetLanguage);
 
-                cmbChampionships.SelectedItem = appSettings.Championship;
-                cmbLanguages.SelectedItem = appSettings.Language;
+                SetComboBoxes(appSettings.Championship, language, appSettings);
             }
             else
             {
@@ -59,6 +52,7 @@ namespace WindowsFormsApp
             }
         }
 
+        public event EventHandler<LanguageChangedEventArgs> OnLanguageChanged;
         private void btnOk_Click(object sender, EventArgs e)
         {
             Forms.CostumMessageBoxForm msgBoxForm = new Forms.CostumMessageBoxForm();
@@ -75,20 +69,15 @@ namespace WindowsFormsApp
             if (msgBoxForm.ShowDialog() == DialogResult.OK)
             {
                 settingsRepo.SaveSingle(appSettings);
-            }
 
-            language = appSettings.Language;
-            if(language == "Croatian" || language == "Hrvatski")
-            {
-                SetLanguage("hr");
-            }
-            else
-            {
-                SetLanguage("en");
-            }
+                language = appSettings.Language;
+                LanguageUtility.SetNewLanguage(language, SetLanguage);
 
-            cmbChampionships.SelectedItem = appSettings.Championship;
-            cmbLanguages.SelectedItem = appSettings.Language;
+                SetComboBoxes(appSettings.Championship, language, appSettings);
+
+                string culture = language == "Croatian" || language == "Hrvatski" ? "hr" : "en";
+                OnLanguageChanged?.Invoke(Parent.Parent, new LanguageChangedEventArgs { Culture = culture });
+            }
         }
 
         private void SetLanguage(string culture)
@@ -99,6 +88,18 @@ namespace WindowsFormsApp
             Controls.Clear();
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
+        }
+        private void SetComboBoxes(string championship, string lng, AppSettings aps)
+        {
+            if (lng == "Croatian" || lng == "Hrvatski")
+                cmbLanguages.SelectedIndex = 0;
+            else
+                cmbLanguages.SelectedIndex = 1;
+
+            if (aps.Championship == "Men" || aps.Championship == "Muško")
+                cmbChampionships.SelectedIndex = 0;
+            else
+                cmbChampionships.SelectedIndex = 1;
         }
     }
 }

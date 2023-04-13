@@ -19,6 +19,7 @@ namespace WindowsFormsApp
         private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
         private Settings formSettings = new Settings();
         string language;
+
         public MainForm()
         {
             if (!File.Exists(FilePaths.appSettingsPath))
@@ -31,18 +32,18 @@ namespace WindowsFormsApp
             }
 
             language = appSettingsRepo.LoadSingle().Language;
-            if(language == "Croatian" || language == "Hrvatski")
-            {
-                SetLanguage("hr");
-            }
-            else
-            {
-                SetLanguage("en");
-            }
-            
+            LanguageUtility.SetNewLanguage(language, SetLanguage);
         }
 
-        private void SetLanguage(string culture)
+        private void FormSettings_OnLanguageChanged(object? sender, DataAccessLayer.Events.LanguageChangedEventArgs e)
+        {
+            SetLanguage(e.Culture);
+            Settings frmSettings = new Settings();
+            frmSettings.OnLanguageChanged += FormSettings_OnLanguageChanged;
+            OpenNewForm(frmSettings);
+        }
+
+        public void SetLanguage(string culture)
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
@@ -76,7 +77,9 @@ namespace WindowsFormsApp
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            OpenNewForm(new Settings());
+            Settings frmSettings = new Settings();
+            frmSettings.OnLanguageChanged += FormSettings_OnLanguageChanged;
+            OpenNewForm(frmSettings);
         }
 
         private void MainForm_Load(object sender, EventArgs e)

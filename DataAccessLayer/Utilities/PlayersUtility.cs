@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Utilities
 {
-    public class PlayersUtility
+    public static class PlayersUtility
     {
         public static IList<Player> GetPlayersBasedOnFifaCode(IList<Match> matches, string fifaCode)
         {

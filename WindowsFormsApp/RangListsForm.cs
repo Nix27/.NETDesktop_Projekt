@@ -24,14 +24,7 @@ namespace WindowsFormsApp
         public RangListsForm()
         {
             var language = appSettingsRepo.LoadSingle().Language;
-            if (language == "Croatian" || language == "Hrvatski")
-            {
-                SetLanguage("hr");
-            }
-            else
-            {
-                SetLanguage("en");
-            }
+            LanguageUtility.SetNewLanguage(language, SetLanguage);
         }
 
         private void RangListsForm_Load(object sender, EventArgs e)

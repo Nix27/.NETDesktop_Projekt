@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Utilities
 {
-    public class ConfigUtility
+    public static class ConfigUtility
     {
         public static string ReadConfig()
         {

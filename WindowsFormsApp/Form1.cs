@@ -26,14 +26,7 @@ namespace WindowsFormsApp
         public Form1()
         {
             string language = appSettingsRepo.LoadSingle().Language;
-            if (language == "Croatian" || language == "Hrvatski")
-            {
-                SetLanguage("hr");
-            }
-            else
-            {
-                SetLanguage("en");
-            }
+            LanguageUtility.SetNewLanguage(language, SetLanguage);
         }
 
         private void SetLanguage(string culture)
