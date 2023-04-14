@@ -170,6 +170,7 @@
             this.Controls.Add(this.btnCreatePdf);
             this.Controls.Add(this.dgvMatches);
             this.Controls.Add(this.dgvPlayers);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "RangListsForm";
             this.Load += new System.EventHandler(this.RangListsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();

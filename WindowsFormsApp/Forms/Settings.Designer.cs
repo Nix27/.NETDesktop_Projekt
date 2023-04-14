@@ -81,7 +81,7 @@
             this.Controls.Add(this.lblLanguage);
             this.Controls.Add(this.cmbChampionships);
             this.Controls.Add(this.lblChampion);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Settings";
             this.Load += new System.EventHandler(this.Settings_Load);
             this.ResumeLayout(false);

@@ -198,7 +198,7 @@ namespace DataAccessLayer.Models
         [JsonIgnore]
         public bool IsFavorite { get; set; }
         [JsonIgnore]
-        public string ProfileUrl { get; set; } = @"C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\DataAccessLayer\images\defaultProfilePic.jpg";
+        public string ProfileUrl { get; set; } = @"..\..\..\..\DataAccessLayer\images\defaultProfilePic.jpg";
         public string ForFileLine() => $"{Name}{Del}{Captain}{Del}{ShirtNumber}{Del}{Position}{Del}{IsFavorite}{Del}{ProfileUrl}";
 
         public Player FromFileLine(string line)

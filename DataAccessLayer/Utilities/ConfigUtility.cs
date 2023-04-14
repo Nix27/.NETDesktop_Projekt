@@ -10,7 +10,7 @@ namespace DataAccessLayer.Utilities
     {
         public static string ReadConfig()
         {
-            return File.ReadAllText(FilePaths.configPath);
+            return File.ReadAllText(FilePaths.CONFIG_PATH);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace WindowsFormsApp
     public partial class RangListsForm : Form
     {
         private StartForm f1 = new StartForm();
-        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
+        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.APP_SETTINGS_PATH);
         public RangListsForm()
         {
             var language = appSettingsRepo.LoadSingle().Language;
@@ -36,7 +36,7 @@ namespace WindowsFormsApp
             }
             catch
             {
-                MessageBox.Show("Please choose representation from start page!");
+                MessageBox.Show("Unable to display data!");
                 return;
             }
         }
@@ -48,7 +48,6 @@ namespace WindowsFormsApp
 
             Controls.Clear();
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
         }
 
         private void ShowPlayersRankList()
@@ -104,9 +103,16 @@ namespace WindowsFormsApp
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "PDF Files (*.pdf)|*.pdf";
 
-            if (sfd.ShowDialog() == DialogResult.OK)
+            try
             {
-                CreatePdf(sfd.FileName);
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    CreatePdf(sfd.FileName);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Unable to create pdf!");
             }
         }
 

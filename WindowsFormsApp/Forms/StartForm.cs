@@ -13,15 +13,15 @@ namespace WindowsFormsApp
     public partial class StartForm : Form
     {
         private readonly IRepositoryFetch repoFetch = new RepositoryFetch();
-		private IList<NationalTeam> allTeams;
+        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.APP_SETTINGS_PATH);
+        private FileRepository<NationalTeam> selectedTeamRepo;
+        private FileRepository<Player> playerRepo;
+        private IList<NationalTeam> allTeams;
         private static IList<Match> allMatches;
         private static IList<Player> players;
         private IList<PlayerControl> selectedPlayerControls = new List<PlayerControl>();
-        private FileRepository<NationalTeam> ntRepo;
-        private FileRepository<Player> playerRepo;
         private string championShip;
         private static NationalTeam selectedCountry;
-        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
 
         public StartForm()
         {
@@ -36,7 +36,6 @@ namespace WindowsFormsApp
 
             Controls.Clear();
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
         }
 
         private async void Form1_Load(object sender, EventArgs e)
@@ -45,42 +44,38 @@ namespace WindowsFormsApp
             {
                 var loadedAppSettings = appSettingsRepo.LoadSingle();
                 championShip = loadedAppSettings.Championship;
+                string selectedTeamPath = championShip == Constants.MEN_REPRESENTATION_ENG || championShip == Constants.MEN_REPRESENTATION_CRO ? FilePaths.SELECTED_MEN_TEAM_PATH : FilePaths.SELECTED_WOMEN_TEAM_PATH;
+                selectedTeamRepo = new FileRepository<NationalTeam>(selectedTeamPath);
 
                 string methodForGetData = ConfigUtility.ReadConfig();
                 string urlForTeams = "";
                 string urlForMatches = "";
 
-                if (methodForGetData == "API")
+                if (methodForGetData == Constants.API_METHOD)
                 {
-                    urlForTeams = championShip == "Men" || championShip == "Muško" ? Links.menAllTeamsLink : Links.womenAllTeamsLink;
-                    urlForMatches = championShip == "Men" || championShip == "Muško" ? Links.menAllMatchesLink : Links.womenAllMatchesLink;
+                    urlForTeams = championShip == Constants.MEN_REPRESENTATION_ENG || championShip == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_TEAMS_LINK : Links.WOMEN_ALL_TEAMS_LINK;
+                    urlForMatches = championShip == Constants.MEN_REPRESENTATION_ENG || championShip == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_MATCHES_LINK : Links.WOMEN_ALL_MATCHES_LINK;
 
                     pbLoader.Visible = true;
                     allTeams = await repoFetch.GetFromApi<NationalTeam>(urlForTeams);
                     allMatches = await repoFetch.GetFromApi<Match>(urlForMatches);
                     pbLoader.Visible = false;
                 }
-                else if (methodForGetData == "JSON")
+                else if (methodForGetData == Constants.JSON_METHOD)
                 {
-                    urlForTeams = championShip == "Men" || championShip == "Muško" ? Links.menAllTeamsJson : Links.womenAllTeamsJson;
-                    urlForMatches = championShip == "Men" || championShip == "Muško" ? Links.menAllMatchesJson : Links.womenAllMatchesJson;
+                    urlForTeams = championShip == Constants.MEN_REPRESENTATION_ENG || championShip == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_TEAMS_JSON : Links.WOMEN_ALL_TEAMS_JSON;
+                    urlForMatches = championShip == Constants.MEN_REPRESENTATION_ENG || championShip == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_MATCHES_JSON : Links.WOMEN_ALL_MATCHES_JSON;
 
                     allTeams = repoFetch.GetFromJson<NationalTeam>(urlForTeams);
                     allMatches = repoFetch.GetFromJson<Match>(urlForMatches);
                 }
 
-                cmbRepresentation.Items.Add("Select representation");
                 cmbRepresentation.Items.AddRange(allTeams.Select(t => t.ToString()).ToArray());
-                cmbRepresentation.SelectedIndex = 0;
 
-                if (championShip == "Men" || championShip == "Muško")
-                {
-                    LoadSavedTeam(FilePaths.selectedMenTeamPath);
-                }
+                if(File.Exists(selectedTeamPath))
+                    LoadSavedTeam(selectedTeamPath);
                 else
-                {
-                    LoadSavedTeam(FilePaths.selectedWomenTeamPath);
-                }
+                    cmbRepresentation.SelectedIndex = 0;
             }
             catch
             {
@@ -92,32 +87,26 @@ namespace WindowsFormsApp
 
         private void LoadSavedTeam(string path)
         {
-            ntRepo = new FileRepository<NationalTeam>(path);
-            if (File.Exists(path))
-            {
-                var loadedTeam = ntRepo.LoadSingle();
-                cmbRepresentation.SelectedItem = loadedTeam.ToString();
-            }
+            var loadedTeam = selectedTeamRepo.LoadSingle();
+            cmbRepresentation.SelectedItem = loadedTeam.ToString();
         }
 
 		private void cmbRepresentation_SelectedIndexChanged(object sender, EventArgs e)
 		{
-            if (cmbRepresentation.SelectedIndex == 0) return;
-
             selectedPlayerControls.Clear();
             flpPlayers.Controls.Clear();
             flpFavouritePlayers.Controls.Clear();
 
-            selectedCountry = allTeams.ToArray()[cmbRepresentation.SelectedIndex - 1];
-            ntRepo.SaveSingle(selectedCountry);
+            selectedCountry = allTeams.ToArray()[cmbRepresentation.SelectedIndex];
+            selectedTeamRepo.SaveSingle(selectedCountry);
 
             string country = selectedCountry.Country;
             string path;
 
-            if (championShip == "Men" || championShip == "Muško")
-                path = FilePaths.menPlayersPath + country + "Players.txt";
+            if (championShip == Constants.MEN_REPRESENTATION_ENG || championShip == Constants.MEN_REPRESENTATION_CRO)
+                path = FilePaths.MEN_PLAYERS_PATH + country + "Players.txt";
             else
-                path = FilePaths.womenPlayersPath + country + "Players.txt";
+                path = FilePaths.WOMEN_PLAYERS_PATH + country + "Players.txt";
 
             playerRepo = new FileRepository<Player>(path);
 
@@ -184,6 +173,7 @@ namespace WindowsFormsApp
             if(e.Button == MouseButtons.Left && selectedPlayerControls.Count > 0) 
             {
                 PlayerControl pc = sender as PlayerControl;
+                pc.Parent.AllowDrop = false;
                 pc.DoDragDrop(selectedPlayerControls, DragDropEffects.Move);
             }
         }
@@ -212,16 +202,16 @@ namespace WindowsFormsApp
 
                 pc.PlayerName = player.IsFavorite ? player.Name + " ⭐" : player.Name;
 
-                if (flp != pc.Parent)
-                {
-                    flp.Controls.Add(pc);
-                    pc.BackColor = SystemColors.Control;
-                }
+                flp.Controls.Add(pc);
+                pc.BackColor = SystemColors.Control;
                     
             }
 
             selectedPlayerControls.ToList().ForEach(pc => pc.BackColor = SystemColors.Control);
             selectedPlayerControls.Clear();
+            flpPlayers.AllowDrop = true;
+            flpFavouritePlayers.AllowDrop = true;
+
             playerRepo.SaveMultiple(players);
         }
 
@@ -241,7 +231,7 @@ namespace WindowsFormsApp
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     string fileName = ofd.SafeFileName;
-                    string filePath = Path.Combine(FilePaths.imagesPath, fileName);
+                    string filePath = Path.Combine(FilePaths.IMAGES_PATH, fileName);
 
                     if (!File.Exists(filePath))
                         File.Copy(ofd.FileName, filePath, true);
@@ -253,7 +243,7 @@ namespace WindowsFormsApp
             }
             catch
             {
-                MessageBox.Show("Unable to save picture");
+                MessageBox.Show("Unable to save or set picture");
             }
         }
     }

@@ -10,7 +10,7 @@
     <Compile Update="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\PlayerControl.cs">
+    <Compile Update="User controls\PlayerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Forms\RangListsForm.cs">

@@ -184,7 +184,7 @@
             this.Controls.Add(this.flpPlayers);
             this.Controls.Add(this.lblChooseRep);
             this.Controls.Add(this.cmbRepresentation);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "StartForm";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.pnlPlayersHeader.ResumeLayout(false);

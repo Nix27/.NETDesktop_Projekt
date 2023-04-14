@@ -16,13 +16,15 @@ namespace WindowsFormsApp
     public partial class MainForm : Form
     {
         private Form activeForm;
-        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
+        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.APP_SETTINGS_PATH);
         private Settings formSettings = new Settings();
         string language;
         
         public MainForm()
         {
-            if (!File.Exists(FilePaths.appSettingsPath))
+            InitializeComponent();
+
+            if (!File.Exists(FilePaths.APP_SETTINGS_PATH))
             {
                 if (formSettings.ShowDialog() == DialogResult.OK)
                 {
@@ -48,8 +50,12 @@ namespace WindowsFormsApp
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
 
-            Controls.Clear();
-            InitializeComponent();
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainForm));
+
+            this.Text = resources.GetString("$this.Text");
+            btnHome.Text = resources.GetString("btnHome.Text");
+            btnRangLists.Text = resources.GetString("btnRangLists.Text");
+            btnSettings.Text = resources.GetString("btnSettings.Text");
         }
 
         private void OpenNewForm(Form childForm)
@@ -58,7 +64,6 @@ namespace WindowsFormsApp
 
             activeForm = childForm;
             childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
             this.pnlMainContainer.Controls.Add(childForm);
             childForm.BringToFront();
@@ -87,18 +92,16 @@ namespace WindowsFormsApp
             OpenNewForm(new StartForm());
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) 
         {
             Forms.CostumMessageBoxForm msgBoxFrom = new Forms.CostumMessageBoxForm();
 
-            if (language == "Croatian" || language == "Hrvatski")
+            if (language == Constants.CROATIAN_LANGUAGE_ENG || language == Constants.CROATIAN_LANGUAGE_CRO)
                 msgBoxFrom.SetTitleAndQuestion("Izlaz", "Jeste li sigurni da želite izaći iz aplikacije?");
             else
                 msgBoxFrom.SetTitleAndQuestion("Exit", "Are you sure you want to exit the application?");
 
-            if (msgBoxFrom.ShowDialog() == DialogResult.OK)
-                Application.ExitThread();
-            else
+            if (msgBoxFrom.ShowDialog() == DialogResult.Cancel)
                 e.Cancel = true;
         }
     }

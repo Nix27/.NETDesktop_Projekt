@@ -8,12 +8,12 @@ namespace DataAccessLayer.Utilities
 {
     public static class FilePaths
     {
-        public const string configPath = @"..\..\..\..\DataAccessLayer\appfiles\Config.txt";
-        public const string appSettingsPath = @"..\..\..\..\DataAccessLayer\appfiles\AppSettings.txt";
-        public const string selectedMenTeamPath = @"..\..\..\..\DataAccessLayer\appfiles\SelectedTeam\SelectedMenTeam.txt";
-        public const string selectedWomenTeamPath = @"..\..\..\..\DataAccessLayer\appfiles\SelectedTeam\SelectedWomenTeam.txt";
-        public const string menPlayersPath = @"..\..\..\..\DataAccessLayer\appfiles\Players\Men\";
-        public const string womenPlayersPath = @"..\..\..\..\DataAccessLayer\appfiles\Players\Women\";
-        public const string imagesPath = @"..\..\..\..\DataAccessLayer\images";
+        public const string CONFIG_PATH = @"..\..\..\..\DataAccessLayer\appfiles\Config.txt";
+        public const string APP_SETTINGS_PATH = @"..\..\..\..\DataAccessLayer\appfiles\AppSettings.txt";
+        public const string SELECTED_MEN_TEAM_PATH = @"..\..\..\..\DataAccessLayer\appfiles\SelectedTeam\SelectedMenTeam.txt";
+        public const string SELECTED_WOMEN_TEAM_PATH = @"..\..\..\..\DataAccessLayer\appfiles\SelectedTeam\SelectedWomenTeam.txt";
+        public const string MEN_PLAYERS_PATH = @"..\..\..\..\DataAccessLayer\appfiles\Players\Men\";
+        public const string WOMEN_PLAYERS_PATH = @"..\..\..\..\DataAccessLayer\appfiles\Players\Women\";
+        public const string IMAGES_PATH = @"..\..\..\..\DataAccessLayer\images";
     }
 }

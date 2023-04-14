@@ -15,10 +15,10 @@ namespace WindowsFormsApp.Forms
 {
     public partial class CostumMessageBoxForm : Form
     {
-        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.appSettingsPath);
+        private FileRepository<AppSettings> appSettingsRepo = new FileRepository<AppSettings>(FilePaths.APP_SETTINGS_PATH);
         public CostumMessageBoxForm()
         {
-            if (File.Exists(FilePaths.appSettingsPath))
+            if (File.Exists(FilePaths.APP_SETTINGS_PATH))
             {
                 var language = appSettingsRepo.LoadSingle().Language;
                 LanguageUtility.SetNewLanguage(language, SetCulture);

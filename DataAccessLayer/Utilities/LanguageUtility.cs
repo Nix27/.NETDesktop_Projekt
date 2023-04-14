@@ -11,14 +11,8 @@ namespace DataAccessLayer.Utilities
         public delegate void ChangeLanguage(string culture);
         public static void SetNewLanguage(string lng, ChangeLanguage methodForChangeLanguage)
         {
-            if (lng == "Croatian" || lng == "Hrvatski")
-            {
-                methodForChangeLanguage("hr");
-            }
-            else
-            {
-                methodForChangeLanguage("en");
-            }
+            string culture = lng == Constants.CROATIAN_LANGUAGE_ENG || lng == Constants.CROATIAN_LANGUAGE_CRO ? "hr" : "en";
+            methodForChangeLanguage(culture);
         }
     }
 }
