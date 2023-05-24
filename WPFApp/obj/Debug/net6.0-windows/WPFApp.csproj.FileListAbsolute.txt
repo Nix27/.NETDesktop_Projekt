@@ -1,0 +1,29 @@
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\bin\Debug\net6.0-windows\WPFApp.exe
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\bin\Debug\net6.0-windows\WPFApp.deps.json
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\bin\Debug\net6.0-windows\WPFApp.runtimeconfig.json
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\bin\Debug\net6.0-windows\WPFApp.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\bin\Debug\net6.0-windows\WPFApp.pdb
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp.csproj.AssemblyReference.cache
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp_MarkupCompile.cache
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp_MarkupCompile.lref
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp.g.resources
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp.AssemblyInfoInputs.cache
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp.AssemblyInfo.cs
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp.csproj.CoreCompileInputs.cache
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\refint\WPFApp.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp.pdb
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp.genruntimeconfig.cache
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\ref\WPFApp.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\User controls\PlayerControl.g.cs
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\User controls\PlayerControl.baml
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\Windows\Settings.g.cs
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\bin\Debug\net6.0-windows\DataAccessLayer.dll
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\bin\Debug\net6.0-windows\DataAccessLayer.pdb
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\Windows\Settings.baml
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp.csproj.CopyComplete

@@ -1,0 +1,55 @@
+﻿<Window x:Class="WPFApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFApp"
+        mc:Ignorable="d"
+        Title="Football championships" Height="450" Width="800">
+    <StackPanel>
+        <Grid Height="40" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnFavouriteTeamDetails" Grid.Column="0" Margin="5" Height="25" Content="Details"></Button>
+            <ComboBox x:Name="cmbFavouriteTeam" Grid.Column="1" Margin="5" Height="25"></ComboBox>
+            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center">
+                <Label x:Name="lbFavouriteTeamResult" FontSize="20" Content="0"></Label>
+                <Label Content=":" FontSize="20"></Label>
+                <Label x:Name="lbOpponentTeamResult" FontSize="20" Content="0"></Label>
+            </StackPanel>
+            <ComboBox x:Name="cmbOpponentTeam" Grid.Column="3" Margin="5" Height="25"></ComboBox>
+            <Button x:Name="btnOpponentTeamDetails" Grid.Column="4" Margin="5" Height="25" Content="Details"></Button>
+        </Grid>
+
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/img/footballBackground.jpg" Stretch="Fill"/>
+            </Grid.Background>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+        </Grid>
+    </StackPanel>
+</Window>
