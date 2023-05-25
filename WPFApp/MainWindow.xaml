@@ -16,15 +16,15 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="btnFavouriteTeamDetails" Grid.Column="0" Margin="5" Height="25" Content="Details"></Button>
+            <Button x:Name="btnFavouriteTeamDetails" Grid.Column="0" Margin="5" Height="25" Content="Details" Click="btnFavouriteTeamDetails_Click"></Button>
             <ComboBox x:Name="cmbFavouriteTeam" Grid.Column="1" Margin="5" Height="25" SelectionChanged="cmbFavouriteTeam_SelectionChanged"/>
             <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center">
                 <Label x:Name="lbFavouriteTeamResult" FontSize="20" Content="0"></Label>
                 <Label Content=":" FontSize="20"></Label>
                 <Label x:Name="lbOpponentTeamResult" FontSize="20" Content="0"></Label>
             </StackPanel>
-            <ComboBox x:Name="cmbOpponentTeam" Grid.Column="3" Margin="5" Height="25"></ComboBox>
-            <Button x:Name="btnOpponentTeamDetails" Grid.Column="4" Margin="5" Height="25" Content="Details"></Button>
+            <ComboBox x:Name="cmbOpponentTeam" Grid.Column="3" Margin="5" Height="25" SelectionChanged="cmbOpponentTeam_SelectionChanged"></ComboBox>
+            <Button x:Name="btnOpponentTeamDetails" Grid.Column="4" Margin="5" Height="25" Content="Details" Click="btnOpponentTeamDetails_Click"></Button>
         </Grid>
 
         <Grid>

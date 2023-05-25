@@ -34,6 +34,7 @@ namespace WPFApp
         private IList<NationalTeam> allTeams;
         private IList<Match> allMatches;
         private static NationalTeam favouriteTeam;
+        private IList<Match> allMatchesOfFavouriteTeam;
 
         public MainWindow()
         {
@@ -101,7 +102,9 @@ namespace WPFApp
         private void LoadSavedTeam()
         {
             var loadedTeam = selectedTeamRepo.LoadSingle();
-            cmbFavouriteTeam.SelectedItem = loadedTeam.ToString();
+            var selectedTeam = allTeams.FirstOrDefault(t => t.FifaCode == loadedTeam.FifaCode);
+            var indexOfSelectedTeam = allTeams.IndexOf(selectedTeam);
+            cmbFavouriteTeam.SelectedIndex = indexOfSelectedTeam;
         }
 
         private async void cmbFavouriteTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -110,16 +113,56 @@ namespace WPFApp
 
             selectedTeamRepo.SaveSingle(favouriteTeam);
 
-            string fifaCode = favouriteTeam.FifaCode;
-            string matchesUrl = championship == Constants.MEN_REPRESENTATION_ENG || 
-                championship == Constants.MEN_REPRESENTATION_CRO ? 
-                Links.MEN_MATCHES_OPPONENTS : 
-                Links.WOMEN_MATCHES_OPPONENTS;
+            allMatchesOfFavouriteTeam = await GetOpponents(favouriteTeam, repoFetch, championship);
 
-            var allMatchesOfFavouriteTeam = await repoFetch.GetFromApi<Match>(matchesUrl + fifaCode);
-            var opponents = allMatchesOfFavouriteTeam.Select(m => m.HomeTeam.Code == fifaCode ? $"{m.AwayTeam.Country} ({m.AwayTeam.Code})" : $"{m.HomeTeam.Country} ({m.HomeTeam.Code})");
+            var opponents = allMatchesOfFavouriteTeam.Select(m => m.HomeTeam.Code == favouriteTeam.FifaCode ? 
+            $"{m.AwayTeam.Country} ({m.AwayTeam.Code})" : 
+            $"{m.HomeTeam.Country} ({m.HomeTeam.Code})");
 
             cmbOpponentTeam.ItemsSource = opponents;
+            cmbOpponentTeam.SelectedIndex = 0;
+        }
+
+        private async Task<IList<Match>> GetOpponents(NationalTeam favouriteTeam, IRepositoryFetch repoFetch, string championship)
+        {
+            string fifaCode = favouriteTeam.FifaCode;
+            string matchesUrl = championship == Constants.MEN_REPRESENTATION_ENG ||
+                championship == Constants.MEN_REPRESENTATION_CRO ?
+                Links.MEN_MATCHES_OPPONENTS :
+                Links.WOMEN_MATCHES_OPPONENTS;
+
+            return await repoFetch.GetFromApi<Match>(matchesUrl + fifaCode);
+        }
+
+        private void cmbOpponentTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbOpponentTeam.SelectedIndex == -1) cmbOpponentTeam.SelectedIndex = 0;
+
+            var selectedMatch = allMatchesOfFavouriteTeam.ToArray()[cmbOpponentTeam.SelectedIndex];
+            var fifaCode = favouriteTeam.FifaCode;
+
+            lbFavouriteTeamResult.Content = fifaCode == selectedMatch.HomeTeam.Code ? selectedMatch.HomeTeam.Goals : selectedMatch.AwayTeam.Goals;
+            lbOpponentTeamResult.Content = fifaCode == selectedMatch.HomeTeam.Code ? selectedMatch.AwayTeam.Goals : selectedMatch.HomeTeam.Goals;
+        }
+
+        private void btnFavouriteTeamDetails_Click(object sender, RoutedEventArgs e)
+        {
+            TeamDetails teamDetails = new TeamDetails();
+            NationalTeam nationalTeam = favouriteTeam;
+            teamDetails.DataContext = nationalTeam;
+
+            teamDetails.Show();
+        }
+
+        private void btnOpponentTeamDetails_Click(object sender, RoutedEventArgs e)
+        {
+            TeamDetails teamDetails = new TeamDetails();
+            var selectedMatch = allMatchesOfFavouriteTeam.ToArray()[cmbOpponentTeam.SelectedIndex];
+            var opponentFifaCode = selectedMatch.HomeTeam.Code == favouriteTeam.FifaCode ? selectedMatch.AwayTeam.Code : selectedMatch.HomeTeam.Code;
+            NationalTeam nationalTeam = allTeams.FirstOrDefault(t => t.FifaCode == opponentFifaCode);
+            teamDetails.DataContext = nationalTeam;
+
+            teamDetails.Show();
         }
     }
 }
