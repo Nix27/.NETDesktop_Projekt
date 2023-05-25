@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApp.Windows"
         mc:Ignorable="d"
-        Title="Settings" Height="250" Width="400">
+        Title="Settings" Height="250" Width="400" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -19,13 +19,15 @@
         </Grid.ColumnDefinitions>
         
         <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Championship:</Label>
-        <ComboBox x:Name="cmbChampionships" Grid.Row="0" Grid.Column="1" Width="150" Height="20" HorizontalAlignment="Left">
+        <ComboBox x:Name="cmbChampionships" Grid.Row="0" Grid.Column="1" Width="150" Height="20" HorizontalAlignment="Left"
+                  SelectedIndex="0">
             <ComboBoxItem Content="Men"/>
             <ComboBoxItem Content="Women"/>
         </ComboBox>
 
         <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Languages:</Label>
-        <ComboBox x:Name="cmbLanguages" Grid.Row="1" Grid.Column="1" Width="150" Height="20" HorizontalAlignment="Left">
+        <ComboBox x:Name="cmbLanguages" Grid.Row="1" Grid.Column="1" Width="150" Height="20" HorizontalAlignment="Left"
+                  SelectedIndex="0">
             <ComboBoxItem Content="Croatian"/>
             <ComboBoxItem Content="English"/>
         </ComboBox>
@@ -38,6 +40,6 @@
             <RadioButton x:Name="rbFullScreen" GroupName="Size" Tag="FullScreen">Full screen</RadioButton>
         </StackPanel>
         <Button x:Name="btnApply" Grid.Row="4" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left" Click="btnApply_Click">Apply</Button>
-        <Button x:Name="btnCancel" Grid.Row="4" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left" Margin="85,0,0,0">Cancel</Button>
+        <Button x:Name="btnCancel" Grid.Row="4" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left" Margin="85,0,0,0" Click="btnCancel_Click">Cancel</Button>
     </Grid>
 </Window>

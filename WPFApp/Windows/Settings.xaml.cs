@@ -39,8 +39,8 @@ namespace WPFApp.Windows
                 }
             }
 
-            settings.Championship = cmbChampionships.SelectedItem.ToString();
-            settings.Language = cmbChampionships.SelectedItem.ToString();
+            settings.Championship = (cmbChampionships.SelectedItem as ComboBoxItem).Content.ToString();
+            settings.Language = (cmbLanguages.SelectedItem as ComboBoxItem).Content.ToString();
 
             if(selectedSize != "FullScreen")
             {
@@ -58,6 +58,11 @@ namespace WPFApp.Windows
         private void btnApply_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
         }
     }
 }

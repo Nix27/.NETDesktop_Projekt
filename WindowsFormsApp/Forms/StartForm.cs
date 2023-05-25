@@ -73,7 +73,7 @@ namespace WindowsFormsApp
                 cmbRepresentation.Items.AddRange(allTeams.Select(t => t.ToString()).ToArray());
 
                 if(File.Exists(selectedTeamPath))
-                    LoadSavedTeam(selectedTeamPath);
+                    LoadSavedTeam();
                 else
                     cmbRepresentation.SelectedIndex = 0;
             }
@@ -85,7 +85,7 @@ namespace WindowsFormsApp
             }
 		}
 
-        private void LoadSavedTeam(string path)
+        private void LoadSavedTeam()
         {
             var loadedTeam = selectedTeamRepo.LoadSingle();
             cmbRepresentation.SelectedItem = loadedTeam.ToString();

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
-        Title="Football championships" Height="450" Width="800">
+        Title="Football championships" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <StackPanel>
         <Grid Height="40" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
@@ -17,7 +17,7 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="btnFavouriteTeamDetails" Grid.Column="0" Margin="5" Height="25" Content="Details"></Button>
-            <ComboBox x:Name="cmbFavouriteTeam" Grid.Column="1" Margin="5" Height="25"></ComboBox>
+            <ComboBox x:Name="cmbFavouriteTeam" Grid.Column="1" Margin="5" Height="25" SelectionChanged="cmbFavouriteTeam_SelectionChanged"/>
             <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center">
                 <Label x:Name="lbFavouriteTeamResult" FontSize="20" Content="0"></Label>
                 <Label Content=":" FontSize="20"></Label>

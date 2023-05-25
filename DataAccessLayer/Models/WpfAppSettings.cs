@@ -17,16 +17,23 @@ namespace DataAccessLayer.Models
         WpfAppSettings IFileFormattable<WpfAppSettings>.FromFileLine(string line)
         {
             var settings = line.Split(Del);
-            return new WpfAppSettings
+
+            WpfAppSettings wpfAppSettings = new WpfAppSettings
             {
                 Championship = settings[0],
-                Language = settings[1],
-                WindowSize = new WindowSize
+                Language = settings[1]
+            };
+
+            if(settings.Length > 2)
+            {
+                wpfAppSettings.WindowSize = new WindowSize
                 {
                     Width = int.Parse(settings[2]),
                     Height = int.Parse(settings[3])
-                }
-            };
+                };
+            }
+
+            return wpfAppSettings;
         }
     }
 }

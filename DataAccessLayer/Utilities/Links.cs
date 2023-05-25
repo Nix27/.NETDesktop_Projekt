@@ -13,6 +13,8 @@ namespace DataAccessLayer.Utilities
         public const string WOMEN_ALL_TEAMS_LINK = "https://worldcup-vua.nullbit.hr/women/teams/results";
         public const string MEN_ALL_MATCHES_LINK = "https://worldcup-vua.nullbit.hr/men/matches";
         public const string WOMEN_ALL_MATCHES_LINK = "https://worldcup-vua.nullbit.hr/women/matches";
+        public const string MEN_MATCHES_OPPONENTS = "https://worldcup-vua.nullbit.hr/men/matches/country?fifa_code=";
+        public const string WOMEN_MATCHES_OPPONENTS = "https://worldcup-vua.nullbit.hr/women/matches/country?fifa_code=";
 
         //JSON
         public const string MEN_ALL_TEAMS_JSON = @"..\..\..\..\DataAccessLayer\json\men\results.json";
