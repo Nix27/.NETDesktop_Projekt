@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFApp.User_controls;
 using WPFApp.Windows;
 
 namespace WPFApp
@@ -136,13 +137,122 @@ namespace WPFApp
 
         private void cmbOpponentTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            grStartingEleven.Children.Clear();
+
             if (cmbOpponentTeam.SelectedIndex == -1) cmbOpponentTeam.SelectedIndex = 0;
 
             var selectedMatch = allMatchesOfFavouriteTeam.ToArray()[cmbOpponentTeam.SelectedIndex];
             var fifaCode = favouriteTeam.FifaCode;
 
-            lbFavouriteTeamResult.Content = fifaCode == selectedMatch.HomeTeam.Code ? selectedMatch.HomeTeam.Goals : selectedMatch.AwayTeam.Goals;
-            lbOpponentTeamResult.Content = fifaCode == selectedMatch.HomeTeam.Code ? selectedMatch.AwayTeam.Goals : selectedMatch.HomeTeam.Goals;
+            bool isHomeTeam = fifaCode == selectedMatch.HomeTeam.Code;
+
+            lbFavouriteTeamResult.Content = isHomeTeam ? selectedMatch.HomeTeam.Goals : selectedMatch.AwayTeam.Goals;
+            lbOpponentTeamResult.Content = isHomeTeam ? selectedMatch.AwayTeam.Goals : selectedMatch.HomeTeam.Goals;
+
+            var startingElevenOfFavouriteTeam = isHomeTeam ? 
+                selectedMatch.HomeTeamStatistics.StartingEleven.ToList() :
+                selectedMatch.AwayTeamStatistics.StartingEleven.ToList();
+
+            var opponentStartingEleven = isHomeTeam ?
+                selectedMatch.AwayTeamStatistics.StartingEleven.ToList() :
+                selectedMatch.HomeTeamStatistics.StartingEleven.ToList();
+
+            SetPlayersOnField(startingElevenOfFavouriteTeam, 0);
+            SetPlayersOnField(opponentStartingEleven, 7);
+        }
+
+        private void GetStartingValues(int numberOfPlayers, ref int start, ref int increase)
+        {
+            switch (numberOfPlayers)
+            {
+                case 1:
+                    start = 2;
+                    increase = 0;
+                    break;
+                case 2:
+                    start = 2;
+                    increase = 2;
+                    break;
+                case 3:
+                    start = 1;
+                    increase = 2;
+                    break;
+                case 4:
+                    start = 1;
+                    increase = 1;
+                    break;
+                case 5:
+                    start = 0;
+                    increase = 1;
+                    break;
+                case 6:
+                    start = 0;
+                    increase = 1;
+                    break;
+            }
+        }
+
+        private void SetPlayersOnField(IList<Player> players, int startRow)
+        {
+            int defenderStart = 0;
+            int defenderIncrease = 0;
+
+            int midfieldStart = 0;
+            int midfieldIncrease = 0;
+
+            int forwardStart = 0;
+            int forwardIncrease = 0;
+
+            int numberOfDefenders = players.Count(p => p.Position == "Defender");
+            int numberOfMidfields = players.Count(p => p.Position == "Midfield");
+            int numberOfForwards = players.Count(p => p.Position == "Forward");
+
+            GetStartingValues(numberOfDefenders, ref defenderStart, ref defenderIncrease);
+            GetStartingValues(numberOfMidfields, ref midfieldStart, ref midfieldIncrease);
+            GetStartingValues(numberOfForwards, ref forwardStart, ref forwardIncrease);
+
+            foreach (var player in players)
+            {
+                PlayerControl pc = CreatePlayerControl(player);
+
+                switch (pc.Position)
+                {
+                    case "Goalie":
+                        pc.SetValue(Grid.RowProperty, startRow < 4 ? startRow + 0 : startRow - 0);
+                        pc.SetValue(Grid.ColumnProperty, 2);
+                        pc.SetValue(Grid.ColumnSpanProperty, 2);
+                        break;
+                    case "Defender":
+                        pc.SetValue(Grid.RowProperty, startRow < 4 ? startRow + 1 : startRow - 1);
+                        pc.SetValue(Grid.ColumnProperty, defenderStart);
+                        defenderStart += defenderIncrease;
+                        break;
+                    case "Midfield":
+                        pc.SetValue(Grid.RowProperty, startRow < 4 ? startRow + 2 : startRow - 2);
+                        pc.SetValue(Grid.ColumnProperty, midfieldStart);
+                        midfieldStart += midfieldIncrease;
+                        break;
+                    case "Forward":
+                        pc.SetValue(Grid.RowProperty, startRow < 4 ? startRow + 3 : startRow - 3);
+                        pc.SetValue(Grid.ColumnProperty, forwardStart);
+                        forwardStart += forwardIncrease;
+                        break;
+                }
+
+                grStartingEleven.Children.Add(pc);
+            }
+        }
+
+        private PlayerControl CreatePlayerControl(Player player)
+        {
+            return new PlayerControl
+            {
+                ProfilePicture = player.ProfileUrl,
+                PlayerName = player.Name,
+                Number = player.ShirtNumber,
+                Position = player.Position,
+                Captain = player.Captain
+            };
         }
 
         private void btnFavouriteTeamDetails_Click(object sender, RoutedEventArgs e)

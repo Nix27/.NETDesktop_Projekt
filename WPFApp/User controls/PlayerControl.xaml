@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPFApp.User_controls"
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="50">
+             d:DesignHeight="50" d:DesignWidth="50" Width="70">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*" />
+            <RowDefinition Height="5*" />
             <RowDefinition />
         </Grid.RowDefinitions>
         
@@ -24,15 +24,17 @@
                Grid.Column="0"
                Foreground="Black"
                Background="White" 
-               FontSize="3"
+               FontSize="7"
                Padding="0"
+               VerticalAlignment="Center"
                ></Label>
             <Label x:Name="lbPlayerName" 
                Grid.Column="1"
                Foreground="Black"
                Background="White" 
-               FontSize="3"
+               FontSize="7"
                Padding="0"
+               VerticalAlignment="Center"
                ></Label>
         </Grid>
     </Grid>

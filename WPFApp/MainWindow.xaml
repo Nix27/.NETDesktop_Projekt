@@ -6,8 +6,13 @@
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
         Title="Football championships" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
-    <StackPanel>
-        <Grid Height="40" Margin="0,10,0,0">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Height="40" Margin="0,0,0,10" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -27,7 +32,7 @@
             <Button x:Name="btnOpponentTeamDetails" Grid.Column="4" Margin="5" Height="25" Content="Details" Click="btnOpponentTeamDetails_Click"></Button>
         </Grid>
 
-        <Grid>
+        <Grid x:Name="grStartingEleven" Grid.Row="1">
             <Grid.Background>
                 <ImageBrush ImageSource="/img/footballBackground.jpg" Stretch="Fill"/>
             </Grid.Background>
@@ -51,5 +56,5 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
         </Grid>
-    </StackPanel>
+    </Grid>
 </Window>

@@ -6,6 +6,20 @@
         xmlns:local="clr-namespace:WPFApp.Windows"
         mc:Ignorable="d"
         Title="TeamDetails" Height="300" Width="400" WindowStartupLocation="CenterScreen">
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Height">
+                        <DoubleAnimation 
+                            From="0"
+                            To="300"
+                            Duration="0:0:0.5" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Window.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
