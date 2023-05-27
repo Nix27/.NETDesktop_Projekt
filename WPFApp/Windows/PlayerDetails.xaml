@@ -1,0 +1,65 @@
+﻿<Window x:Class="WPFApp.Windows.PlayerDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFApp.Windows"
+        mc:Ignorable="d"
+        Title="PlayerDetails" Height="300" Width="400" WindowStartupLocation="CenterScreen">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Window.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard TargetProperty="Opacity">
+                            <DoubleAnimation
+                            From="0"
+                            To="1"
+                            Duration="0:0:1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Grid.Triggers>
+
+        <Viewbox Stretch="Fill" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Width="100">
+            <Image Source="{Binding PlayerPicture, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
+        </Viewbox>
+
+        <Label Content="Name:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label Content="{Binding Name}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"></Label>
+
+        <Label Content="Number:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label Content="{Binding ShirtNumber}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"></Label>
+
+        <Label Content="Position:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label Content="{Binding Position}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"></Label>
+
+        <Label Content="Captain:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label Content="{Binding Captain}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center"></Label>
+
+        <Label Content="Goals:" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label Content="{Binding Goals, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center"></Label>
+
+        <Label Content="Yellow cards:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label Content="{Binding YellowCards, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center"></Label>
+
+        <Button Content="Close" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Width="150" Height="20" Click="Button_Click"></Button>
+    </Grid>
+</Window>

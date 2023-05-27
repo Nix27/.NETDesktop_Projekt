@@ -2,6 +2,7 @@
 using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using DataAccessLayer.Utilities;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,6 +37,10 @@ namespace WPFApp
         private IList<Match> allMatches;
         private static NationalTeam favouriteTeam;
         private IList<Match> allMatchesOfFavouriteTeam;
+        private Match selectedMatch;
+
+        private const string GOAL = "goal";
+        private const string YELLOW_CARD = "yellow-card";
 
         public MainWindow()
         {
@@ -141,7 +146,7 @@ namespace WPFApp
 
             if (cmbOpponentTeam.SelectedIndex == -1) cmbOpponentTeam.SelectedIndex = 0;
 
-            var selectedMatch = allMatchesOfFavouriteTeam.ToArray()[cmbOpponentTeam.SelectedIndex];
+            selectedMatch = allMatchesOfFavouriteTeam.ToArray()[cmbOpponentTeam.SelectedIndex];
             var fifaCode = favouriteTeam.FifaCode;
 
             bool isHomeTeam = fifaCode == selectedMatch.HomeTeam.Code;
@@ -239,6 +244,7 @@ namespace WPFApp
                         break;
                 }
 
+                pc.MouseUp += playerControl_Click;
                 grStartingEleven.Children.Add(pc);
             }
         }
@@ -257,7 +263,7 @@ namespace WPFApp
 
         private void btnFavouriteTeamDetails_Click(object sender, RoutedEventArgs e)
         {
-            TeamDetails teamDetails = new TeamDetails();
+            TeamDetails teamDetails = new();
             NationalTeam nationalTeam = favouriteTeam;
             teamDetails.DataContext = nationalTeam;
 
@@ -266,13 +272,56 @@ namespace WPFApp
 
         private void btnOpponentTeamDetails_Click(object sender, RoutedEventArgs e)
         {
-            TeamDetails teamDetails = new TeamDetails();
-            var selectedMatch = allMatchesOfFavouriteTeam.ToArray()[cmbOpponentTeam.SelectedIndex];
+            TeamDetails teamDetails = new();
+            selectedMatch = allMatchesOfFavouriteTeam.ToArray()[cmbOpponentTeam.SelectedIndex];
             var opponentFifaCode = selectedMatch.HomeTeam.Code == favouriteTeam.FifaCode ? selectedMatch.AwayTeam.Code : selectedMatch.HomeTeam.Code;
             NationalTeam nationalTeam = allTeams.FirstOrDefault(t => t.FifaCode == opponentFifaCode);
             teamDetails.DataContext = nationalTeam;
 
             teamDetails.Show();
+        }
+
+        private void playerControl_Click(object sender, RoutedEventArgs e)
+        {
+            var pc = sender as PlayerControl;
+            string playerName = pc.PlayerName;
+
+            bool isHomePlayer = selectedMatch.HomeTeamStatistics.StartingEleven
+                .ToList()
+                .FirstOrDefault(p => p.Name == playerName) != null;
+
+            int goals = GetNumberOfEventsForPlayer(playerName, isHomePlayer, GOAL);
+            int yellowCards = GetNumberOfEventsForPlayer(playerName, isHomePlayer, YELLOW_CARD);
+
+            PlayerDetails playerDetails = new();
+            Player player = new()
+            {
+                Name = playerName,
+                ShirtNumber = pc.Number,
+                Position = pc.Position,
+                Captain = pc.Captain
+            };
+
+            playerDetails.DataContext = player;
+            playerDetails.Goals = goals;
+            playerDetails.YellowCards = yellowCards;
+
+
+            string currentDirectory = Environment.CurrentDirectory;
+            string filePath = System.IO.Path.Combine(currentDirectory, pc.ProfilePicture);
+            playerDetails.PlayerPicture = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+
+            playerDetails.Show();
+        }
+
+        private int GetNumberOfEventsForPlayer(string playerName, bool isHomePlayer, string eventType)
+        {
+             return isHomePlayer ? selectedMatch.HomeTeamEvents
+                .Where(e => e.Player == playerName && e.TypeOfEvent == eventType)
+                .Count()
+                : selectedMatch.AwayTeamEvents
+                .Where(e => e.Player == playerName && e.TypeOfEvent == eventType)
+                .Count();
         }
     }
 }

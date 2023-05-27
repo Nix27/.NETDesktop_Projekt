@@ -10,6 +10,9 @@
     <Compile Update="User controls\PlayerControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\PlayerDetails.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\Settings.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,6 +25,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="User controls\PlayerControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\PlayerDetails.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\Settings.xaml">

@@ -29,3 +29,5 @@ C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\ne
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\WPFApp.csproj.CopyComplete
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\Windows\TeamDetails.g.cs
 C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\Windows\TeamDetails.baml
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\Windows\PlayerDetails.g.cs
+C:\Users\Nix\Documents\.NET praktikum\Nikola_Zečić_Projekt\WPFApp\obj\Debug\net6.0-windows\Windows\PlayerDetails.baml
