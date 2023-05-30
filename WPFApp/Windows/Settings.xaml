@@ -34,9 +34,9 @@
 
         <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">Size:</Label>
         <StackPanel x:Name="spRadioButtons" Grid.Row="2" Grid.Column="1">
-            <RadioButton x:Name="rbDefault" GroupName="Size" Tag="800;450" Margin="0,7,0,0" IsChecked="True">Default</RadioButton>
+            <RadioButton x:Name="rbDefault" GroupName="Size" Tag="800;450" Margin="0,7,0,0">Default</RadioButton>
             <RadioButton x:Name="rb1024x768" GroupName="Size" Tag="1024;768">1024x768</RadioButton>
-            <RadioButton x:Name="rb1920x1080" GroupName="Size" Tag="1920;1080">1920x1080</RadioButton>
+            <RadioButton x:Name="rb700x700" GroupName="Size" Tag="700;700">700x700</RadioButton>
             <RadioButton x:Name="rbFullScreen" GroupName="Size" Tag="FullScreen">Full screen</RadioButton>
         </StackPanel>
         <Button x:Name="btnApply" Grid.Row="4" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left" Click="btnApply_Click">Apply</Button>

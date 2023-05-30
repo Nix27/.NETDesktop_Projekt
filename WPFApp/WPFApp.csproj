@@ -9,6 +9,12 @@
 
   <ItemGroup>
     <None Remove="img\footballBackground.jpg" />
+    <None Remove="loader.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +23,15 @@
 
   <ItemGroup>
     <Resource Include="img\footballBackground.jpg" />
+    <Resource Include="loader.gif" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Languages\Resource.en-US.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Languages\Resource.hr-HR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

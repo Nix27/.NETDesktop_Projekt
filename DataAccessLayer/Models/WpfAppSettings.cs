@@ -12,7 +12,7 @@ namespace DataAccessLayer.Models
     {
         public WindowSize? WindowSize { get; set; }
 
-        public override string ForFileLine() => base.ForFileLine() + $"{Del}{WindowSize}";
+        public override string ForFileLine() => WindowSize != null ? base.ForFileLine() + $"{Del}{WindowSize}" : base.ForFileLine();
 
         WpfAppSettings IFileFormattable<WpfAppSettings>.FromFileLine(string line)
         {

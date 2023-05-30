@@ -5,9 +5,15 @@ using DataAccessLayer.Utilities;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,12 +38,17 @@ namespace WPFApp
         private FileRepository<WpfAppSettings> appSettingsRepo = new FileRepository<WpfAppSettings>(FilePaths.WPF_APP_SETTINGS_PATH);
         private readonly IRepositoryFetch repoFetch = new RepositoryFetch();
         private FileRepository<NationalTeam> selectedTeamRepo;
+        private FileRepository<Player> playerRepo;
         private string championship;
         private IList<NationalTeam> allTeams;
-        private IList<Match> allMatches;
+        private IList<DataAccessLayer.Models.Match> allMatches;
         private static NationalTeam favouriteTeam;
-        private IList<Match> allMatchesOfFavouriteTeam;
-        private Match selectedMatch;
+        private IList<DataAccessLayer.Models.Match> allMatchesOfFavouriteTeam;
+        private DataAccessLayer.Models.Match selectedMatch;
+        string methodForGetData = ConfigUtility.ReadConfig();
+        string urlForTeams = string.Empty;
+        string urlForMatches = string.Empty;
+        string selectedTeamPath;
 
         private const string GOAL = "goal";
         private const string YELLOW_CARD = "yellow-card";
@@ -58,6 +69,23 @@ namespace WPFApp
                     Application.Current.Shutdown();
                 }
             }
+
+            string language = appSettingsRepo.LoadSingle().Language;
+            LanguageUtility.SetNewLanguage(language, SetCulture);
+        }
+
+        private void SetCulture(string culture)
+        {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
+
+            ResourceManager rm = new ResourceManager("WPFApp.Languages.Resource", Assembly.GetExecutingAssembly());
+            btnFavouriteTeamDetails.Content = rm.GetString("btnFavouriteTeamDetails");
+            btnOpponentTeamDetails.Content = rm.GetString("btnOpponentTeamDetails");
+            lbFavouriteTeam.Content = rm.GetString("lbFavouriteTeam");
+            lbOpponentTeam.Content = rm.GetString("lbOpponentTeam");
+            btnSettings.Content = rm.GetString("btnSettings");
+            this.Title = rm.GetString("title");
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -67,29 +95,12 @@ namespace WPFApp
                 var loadedAppSettings = appSettingsRepo.LoadSingle();
                 championship = loadedAppSettings.Championship;
 
-                string selectedTeamPath = championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO ? FilePaths.SELECTED_MEN_TEAM_PATH : FilePaths.SELECTED_WOMEN_TEAM_PATH;
+                SetWindowSize(loadedAppSettings.WindowSize);
+
+                selectedTeamPath = championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO ? FilePaths.SELECTED_MEN_TEAM_PATH : FilePaths.SELECTED_WOMEN_TEAM_PATH;
                 selectedTeamRepo = new FileRepository<NationalTeam>(selectedTeamPath);
 
-                string methodForGetData = ConfigUtility.ReadConfig();
-                string urlForTeams = string.Empty;
-                string urlForMatches = string.Empty;
-
-                if(methodForGetData == Constants.API_METHOD)
-                {
-                    urlForTeams = championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_TEAMS_LINK : Links.WOMEN_ALL_TEAMS_LINK;
-                    urlForMatches = championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_MATCHES_LINK : Links.WOMEN_ALL_MATCHES_LINK;
-
-                    allTeams = await repoFetch.GetFromApi<NationalTeam>(urlForTeams);
-                    allMatches = await repoFetch.GetFromApi<Match>(urlForMatches);
-                }
-                else if(methodForGetData == Constants.JSON_METHOD)
-                {
-                    urlForTeams = championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_TEAMS_JSON : Links.WOMEN_ALL_TEAMS_JSON;
-                    urlForMatches = championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_MATCHES_JSON : Links.WOMEN_ALL_MATCHES_JSON;
-                    
-                    allTeams = repoFetch.GetFromJson<NationalTeam>(urlForTeams);
-                    allMatches = repoFetch.GetFromJson<Match>(urlForMatches);
-                }
+                await GetData();
 
                 cmbFavouriteTeam.ItemsSource = allTeams;
 
@@ -105,6 +116,38 @@ namespace WPFApp
             }
         }
 
+        private async Task GetData()
+        {
+            if (methodForGetData == Constants.API_METHOD)
+            {
+                urlForTeams = championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_TEAMS_LINK : Links.WOMEN_ALL_TEAMS_LINK;
+                urlForMatches = championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_MATCHES_LINK : Links.WOMEN_ALL_MATCHES_LINK;
+
+                allTeams = await repoFetch.GetFromApi<NationalTeam>(urlForTeams);
+                allMatches = await repoFetch.GetFromApi<DataAccessLayer.Models.Match>(urlForMatches);
+            }
+            else if (methodForGetData == Constants.JSON_METHOD)
+            {
+                urlForTeams = championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_TEAMS_JSON : Links.WOMEN_ALL_TEAMS_JSON;
+                urlForMatches = championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO ? Links.MEN_ALL_MATCHES_JSON : Links.WOMEN_ALL_MATCHES_JSON;
+
+                allTeams = repoFetch.GetFromJson<NationalTeam>(urlForTeams);
+                allMatches = repoFetch.GetFromJson<DataAccessLayer.Models.Match>(urlForMatches);
+            }
+        }
+
+        private void SetWindowSize(WindowSize? windowSize)
+        {
+            if (windowSize == null)
+                this.WindowState = WindowState.Maximized;
+            else
+            {
+                this.WindowState = WindowState.Normal;
+                this.Width = windowSize.Value.Width;
+                this.Height = windowSize.Value.Height;
+            }
+        }
+
         private void LoadSavedTeam()
         {
             var loadedTeam = selectedTeamRepo.LoadSingle();
@@ -115,6 +158,11 @@ namespace WPFApp
 
         private async void cmbFavouriteTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (File.Exists(selectedTeamPath))
+                LoadSavedTeam();
+            else
+                cmbFavouriteTeam.SelectedIndex = 0;
+
             favouriteTeam = allTeams.ToArray()[cmbFavouriteTeam.SelectedIndex];
 
             selectedTeamRepo.SaveSingle(favouriteTeam);
@@ -129,7 +177,7 @@ namespace WPFApp
             cmbOpponentTeam.SelectedIndex = 0;
         }
 
-        private async Task<IList<Match>> GetOpponents(NationalTeam favouriteTeam, IRepositoryFetch repoFetch, string championship)
+        private async Task<IList<DataAccessLayer.Models.Match>> GetOpponents(NationalTeam favouriteTeam, IRepositoryFetch repoFetch, string championship)
         {
             string fifaCode = favouriteTeam.FifaCode;
             string matchesUrl = championship == Constants.MEN_REPRESENTATION_ENG ||
@@ -137,7 +185,7 @@ namespace WPFApp
                 Links.MEN_MATCHES_OPPONENTS :
                 Links.WOMEN_MATCHES_OPPONENTS;
 
-            return await repoFetch.GetFromApi<Match>(matchesUrl + fifaCode);
+            return await repoFetch.GetFromApi<DataAccessLayer.Models.Match>(matchesUrl + fifaCode);
         }
 
         private void cmbOpponentTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -154,16 +202,52 @@ namespace WPFApp
             lbFavouriteTeamResult.Content = isHomeTeam ? selectedMatch.HomeTeam.Goals : selectedMatch.AwayTeam.Goals;
             lbOpponentTeamResult.Content = isHomeTeam ? selectedMatch.AwayTeam.Goals : selectedMatch.HomeTeam.Goals;
 
-            var startingElevenOfFavouriteTeam = isHomeTeam ? 
+            //get favourite starting eleven
+            var startingElevenOfFavouriteTeam = isHomeTeam ?
                 selectedMatch.HomeTeamStatistics.StartingEleven.ToList() :
                 selectedMatch.AwayTeamStatistics.StartingEleven.ToList();
 
+            var selectedFavouriteTeam = isHomeTeam ? selectedMatch.HomeTeam : selectedMatch.AwayTeam;
+            var loadedPlayers = LoadPlayers(selectedFavouriteTeam);
+
+            if(loadedPlayers.Count() > 0)
+            {
+                startingElevenOfFavouriteTeam = loadedPlayers.Where(p => startingElevenOfFavouriteTeam.Contains(p)).ToList();
+            }
+
+            //get opponent starting eleven
             var opponentStartingEleven = isHomeTeam ?
                 selectedMatch.AwayTeamStatistics.StartingEleven.ToList() :
                 selectedMatch.HomeTeamStatistics.StartingEleven.ToList();
 
+            var opponentTeam = isHomeTeam ? selectedMatch.AwayTeam : selectedMatch.HomeTeam;
+            loadedPlayers = LoadPlayers(opponentTeam);
+
+            if (loadedPlayers.Count() > 0)
+            {
+                opponentStartingEleven = loadedPlayers.Where(p => opponentStartingEleven.Contains(p)).ToList();
+            }
+
             SetPlayersOnField(startingElevenOfFavouriteTeam, 0);
             SetPlayersOnField(opponentStartingEleven, 7);
+        }
+
+        private IList<Player> LoadPlayers(Team team)
+        { 
+            IList<Player> players = new List<Player>();
+            string path;
+
+            if (championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO)
+                path = FilePaths.MEN_PLAYERS_PATH + team.Country + "Players.txt";
+            else
+                path = FilePaths.WOMEN_PLAYERS_PATH + team.Country + "Players.txt";
+
+            playerRepo = new FileRepository<Player>(path);
+
+            if (File.Exists(path))
+                players = playerRepo.LoadMultiple();
+
+            return players;
         }
 
         private void GetStartingValues(int numberOfPlayers, ref int start, ref int increase)
@@ -264,8 +348,7 @@ namespace WPFApp
         private void btnFavouriteTeamDetails_Click(object sender, RoutedEventArgs e)
         {
             TeamDetails teamDetails = new();
-            NationalTeam nationalTeam = favouriteTeam;
-            teamDetails.DataContext = nationalTeam;
+            teamDetails.DataContext = favouriteTeam;
 
             teamDetails.Show();
         }
@@ -306,7 +389,6 @@ namespace WPFApp
             playerDetails.Goals = goals;
             playerDetails.YellowCards = yellowCards;
 
-
             string currentDirectory = Environment.CurrentDirectory;
             string filePath = System.IO.Path.Combine(currentDirectory, pc.ProfilePicture);
             playerDetails.PlayerPicture = new BitmapImage(new Uri(filePath, UriKind.Absolute));
@@ -322,6 +404,40 @@ namespace WPFApp
                 : selectedMatch.AwayTeamEvents
                 .Where(e => e.Player == playerName && e.TypeOfEvent == eventType)
                 .Count();
+        }
+
+        private async void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            Settings settings = new();
+
+            if (settings.ShowDialog() == true)
+            {
+                var settingsForSave = settings.GetSettings();
+                appSettingsRepo.SaveSingle(settingsForSave);
+
+                championship = settingsForSave.Championship;
+
+                selectedTeamPath = championship == Constants.MEN_REPRESENTATION_ENG || championship == Constants.MEN_REPRESENTATION_CRO ? FilePaths.SELECTED_MEN_TEAM_PATH : FilePaths.SELECTED_WOMEN_TEAM_PATH;
+                selectedTeamRepo = new FileRepository<NationalTeam>(selectedTeamPath);
+
+                await GetData();
+
+                SetWindowSize(settingsForSave.WindowSize);
+
+                string language = appSettingsRepo.LoadSingle().Language;
+                LanguageUtility.SetNewLanguage(language, SetCulture);
+
+                cmbFavouriteTeam.ItemsSource = allTeams;
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageDialog msd = new MessageDialog();
+            msd.SetTitleAndMessage("Exit", "Are you sure you want to exit?");
+
+            if(msd.ShowDialog() == false)
+                e.Cancel = true;
         }
     }
 }
