@@ -49,6 +49,7 @@ namespace WPFApp
         string urlForTeams = string.Empty;
         string urlForMatches = string.Empty;
         string selectedTeamPath;
+        string language;
 
         private const string GOAL = "goal";
         private const string YELLOW_CARD = "yellow-card";
@@ -70,7 +71,7 @@ namespace WPFApp
                 }
             }
 
-            string language = appSettingsRepo.LoadSingle().Language;
+            language = appSettingsRepo.LoadSingle().Language;
             LanguageUtility.SetNewLanguage(language, SetCulture);
         }
 
@@ -424,7 +425,7 @@ namespace WPFApp
 
                 SetWindowSize(settingsForSave.WindowSize);
 
-                string language = appSettingsRepo.LoadSingle().Language;
+                language = appSettingsRepo.LoadSingle().Language;
                 LanguageUtility.SetNewLanguage(language, SetCulture);
 
                 cmbFavouriteTeam.ItemsSource = allTeams;
@@ -434,9 +435,13 @@ namespace WPFApp
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MessageDialog msd = new MessageDialog();
-            msd.SetTitleAndMessage("Exit", "Are you sure you want to exit?");
 
-            if(msd.ShowDialog() == false)
+            if(language == Constants.CROATIAN_LANGUAGE_CRO || language == Constants.CROATIAN_LANGUAGE_ENG)
+                msd.SetTitleAndMessage("Izlaz", "Jeste li sigurni da želite izaći?");
+            else
+                msd.SetTitleAndMessage("Exit", "Are you sure you want to exit?");
+
+            if (msd.ShowDialog() == false)
                 e.Cancel = true;
         }
     }

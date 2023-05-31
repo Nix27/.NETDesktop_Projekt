@@ -42,24 +42,24 @@
             <Image Source="{Binding PlayerPicture, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
         </Viewbox>
 
-        <Label Content="Name:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label x:Name="lbName" Content="Name:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
         <Label Content="{Binding Name}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"></Label>
 
-        <Label Content="Number:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label x:Name="lbNumber" Content="Number:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
         <Label Content="{Binding ShirtNumber}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"></Label>
 
-        <Label Content="Position:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label x:Name="lbPosition" Content="Position:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
         <Label Content="{Binding Position}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"></Label>
 
-        <Label Content="Captain:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label x:Name="lbCaptain" Content="Captain:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
         <Label Content="{Binding Captain}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center"></Label>
 
-        <Label Content="Goals:" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label x:Name="lbGoals" Content="Goals:" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
         <Label Content="{Binding Goals, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center"></Label>
 
-        <Label Content="Yellow cards:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <Label x:Name="lbYellowCards" Content="Yellow cards:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
         <Label Content="{Binding YellowCards, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center"></Label>
 
-        <Button Content="Close" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Width="150" Height="20" Click="Button_Click"></Button>
+        <Button x:Name="btnClose" Content="Close" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Width="150" Height="20" Click="Button_Click"></Button>
     </Grid>
 </Window>

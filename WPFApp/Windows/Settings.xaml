@@ -18,21 +18,21 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         
-        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Championship:</Label>
+        <Label x:Name="lbChampionship" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Championship:</Label>
         <ComboBox x:Name="cmbChampionships" Grid.Row="0" Grid.Column="1" Width="150" Height="20" HorizontalAlignment="Left"
                   SelectedIndex="0">
-            <ComboBoxItem Content="Men"/>
-            <ComboBoxItem Content="Women"/>
+            <ComboBoxItem x:Name="itMen" Content="Men"/>
+            <ComboBoxItem x:Name="itWomen" Content="Women"/>
         </ComboBox>
 
-        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Languages:</Label>
+        <Label x:Name="lbLanguage" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Language:</Label>
         <ComboBox x:Name="cmbLanguages" Grid.Row="1" Grid.Column="1" Width="150" Height="20" HorizontalAlignment="Left"
                   SelectedIndex="0">
-            <ComboBoxItem Content="Croatian"/>
-            <ComboBoxItem Content="English"/>
+            <ComboBoxItem x:Name="itCroatian" Content="Croatian"/>
+            <ComboBoxItem x:Name="itEnglish" Content="English"/>
         </ComboBox>
 
-        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">Size:</Label>
+        <Label x:Name="lbSize" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">Size:</Label>
         <StackPanel x:Name="spRadioButtons" Grid.Row="2" Grid.Column="1">
             <RadioButton x:Name="rbDefault" GroupName="Size" Tag="800;450" Margin="0,7,0,0">Default</RadioButton>
             <RadioButton x:Name="rb1024x768" GroupName="Size" Tag="1024;768">1024x768</RadioButton>

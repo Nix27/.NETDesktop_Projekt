@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.Xml;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +19,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Resources;
 
 namespace WPFApp.Windows
 {
@@ -26,6 +29,7 @@ namespace WPFApp.Windows
     public partial class Settings : Window
     {
         private FileRepository<WpfAppSettings> appSettingsRepo = new FileRepository<WpfAppSettings>(FilePaths.WPF_APP_SETTINGS_PATH);
+        string language;
 
         public Settings()
         {
@@ -42,7 +46,30 @@ namespace WPFApp.Windows
                 var loadedSettings = appSettingsRepo.LoadSingle();
                 SetSettings(loadedSettings);
             }
+
+            language = appSettingsRepo.LoadSingle().Language;
+            LanguageUtility.SetNewLanguage(language, SetCulture);
         }
+
+        private void SetCulture(string culture)
+        {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
+
+            ResourceManager rm = new ResourceManager("WPFApp.Languages.SettingsLanguages.Resource", Assembly.GetExecutingAssembly());
+            lbChampionship.Content = rm.GetString("lbChampionship");
+            lbLanguage.Content = rm.GetString("lbLanguage");
+            lbSize.Content = rm.GetString("lbSize");
+            rbDefault.Content = rm.GetString("rbDefault");
+            btnApply.Content = rm.GetString("btnApply");
+            btnCancel.Content = rm.GetString("btnCancel");
+            itMen.Content = rm.GetString("itMen");
+            itWomen.Content = rm.GetString("itWomen");
+            itCroatian.Content = rm.GetString("itCroatian");
+            itEnglish.Content = rm.GetString("itEnglish");
+            this.Title = rm.GetString("title");
+        }
+
 
         private void SetSettings(WpfAppSettings settings)
         {

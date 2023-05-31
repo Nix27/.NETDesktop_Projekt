@@ -41,31 +41,31 @@
             </EventTrigger>
         </Grid.Triggers>
 
-        <Label Content="Country:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"></Label>
+        <Label x:Name="lbCountry" Content="Country:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"></Label>
         <Label Content="{Binding Country}" Grid.Row="0" Grid.Column="1"></Label>
 
-        <Label Content="FIFA code:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"></Label>
+        <Label x:Name="lbFifaCode" Content="FIFA code:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"></Label>
         <Label Content="{Binding FifaCode}" Grid.Row="1" Grid.Column="1"></Label>
 
-        <Label Content="Games played:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"></Label>
+        <Label x:Name="lbGamesPlayed" Content="Games played:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"></Label>
         <Label Content="{Binding GamesPlayed}" Grid.Row="2" Grid.Column="1"></Label>
 
-        <Label Content="Wins:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"></Label>
+        <Label x:Name="lbWins" Content="Wins:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"></Label>
         <Label Content="{Binding Wins}" Grid.Row="3" Grid.Column="1"></Label>
 
-        <Label Content="Losses:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"></Label>
+        <Label x:Name="lbLosses" Content="Losses:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"></Label>
         <Label Content="{Binding Losses}" Grid.Row="4" Grid.Column="1"></Label>
 
-        <Label Content="Draws:" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right"></Label>
+        <Label x:Name="lbDraws" Content="Draws:" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right"></Label>
         <Label Content="{Binding Draws}" Grid.Row="5" Grid.Column="1"></Label>
 
-        <Label Content="Scored goals:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right"></Label>
+        <Label x:Name="lbScoredGoals" Content="Scored goals:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right"></Label>
         <Label Content="{Binding GoalsFor}" Grid.Row="6" Grid.Column="1"></Label>
 
-        <Label Content="Against goals:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right"></Label>
+        <Label x:Name="lbAgainstGoals" Content="Against goals:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right"></Label>
         <Label Content="{Binding GoalsAgainst}" Grid.Row="7" Grid.Column="1"></Label>
 
-        <Label Content="Goals differential:" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right"></Label>
+        <Label x:Name="lbGoalsDifferential" Content="Goals differential:" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right"></Label>
         <Label Content="{Binding GoalDifferential}" Grid.Row="8" Grid.Column="1"></Label>
 
         <Button x:Name="btnClose" Content="Close" Grid.Row="9" Grid.ColumnSpan="2" Width="150" Height="20" Click="btnClose_Click" />
