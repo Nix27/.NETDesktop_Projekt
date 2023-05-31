@@ -159,10 +159,13 @@ namespace WPFApp
 
         private async void cmbFavouriteTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (File.Exists(selectedTeamPath))
-                LoadSavedTeam();
-            else
-                cmbFavouriteTeam.SelectedIndex = 0;
+            if (cmbFavouriteTeam.SelectedIndex == -1)
+            {
+                if (File.Exists(selectedTeamPath))
+                    LoadSavedTeam();
+                else
+                    cmbFavouriteTeam.SelectedIndex = 0; 
+            }
 
             favouriteTeam = allTeams.ToArray()[cmbFavouriteTeam.SelectedIndex];
 

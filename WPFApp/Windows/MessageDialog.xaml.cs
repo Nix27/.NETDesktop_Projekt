@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Resources;
+using System.IO;
 
 namespace WPFApp.Windows
 {
@@ -30,8 +31,11 @@ namespace WPFApp.Windows
         {
             InitializeComponent();
 
-            string language = appSettingsRepo.LoadSingle().Language;
-            LanguageUtility.SetNewLanguage(language, SetCulture);
+            if (File.Exists(FilePaths.WPF_APP_SETTINGS_PATH))
+            {
+                string language = appSettingsRepo.LoadSingle().Language;
+                LanguageUtility.SetNewLanguage(language, SetCulture);
+            }
         }
 
         private void SetCulture(string culture)

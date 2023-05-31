@@ -45,10 +45,10 @@ namespace WPFApp.Windows
             {
                 var loadedSettings = appSettingsRepo.LoadSingle();
                 SetSettings(loadedSettings);
-            }
 
-            language = appSettingsRepo.LoadSingle().Language;
-            LanguageUtility.SetNewLanguage(language, SetCulture);
+                language = loadedSettings.Language;
+                LanguageUtility.SetNewLanguage(language, SetCulture);
+            }
         }
 
         private void SetCulture(string culture)
